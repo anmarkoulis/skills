@@ -18,15 +18,25 @@ is two directories above this skill's base directory.
 2. **Layers.** Read the first `factory layers:` line from `AGENTS.md`, else `CLAUDE.md`, at the repo root. No
    line: core only. Once the task folder exists, log
    `ship done <date> status.md layers: <list or none> (from <file>)`.
-3. **Accelerators.** Check the available skills for the soft dependencies each step names. Log
+3. **Resolution table.** For every pipeline step, list which skills were found: the core skill plus each
+   declared layer's `<prefix>-<step>` that exists, for example `verify: factory:verify + shop-verify` or
+   `tracker: factory:tracker (no layer variant)`. A missing variant means the core default applies. Print the
+   table, and once the task folder exists log `ship done <date> status.md resolution: <step>: <skills>; …`.
+4. **Accelerators.** Check the available skills for the soft dependencies each step names. Log
    `ship done <date> status.md accelerators: <present ones, or none>`, so a shallower run is visible.
 
 ## Running a step
 
-Invoke `factory:<step>` with the Skill tool and give it the task folder's absolute path and the tier. Then, for
-each declared layer in order, invoke `<prefix>-<step>` if it exists; its Overrides table applies on top of the
-core step. The step writes its own files and its own `status.md` line; `ship` logs the lines for the stops and
-for the steps it owns (`simplify`).
+1. **Collect overrides first.** For each declared layer, lowest first, invoke `<prefix>-<step>` if the
+   resolution table lists it, and collect its Overrides table. A higher layer's answer for a point replaces a
+   lower one's.
+2. **Run the core step** with the collected values applied: invoke `factory:<step>` with the Skill tool and give
+   it the task folder's absolute path, the tier and the collected overrides. A `set` value replaces the default;
+   a `replace` swaps the mechanics of that point only.
+3. **Run `extend` additions** after the core's own steps, in layer order.
+
+The step writes its own files and its own `status.md` line; `ship` logs the lines for the stops and for the
+steps it owns (`simplify`).
 
 ## Pipeline
 
@@ -34,7 +44,7 @@ for the steps it owns (`simplify`).
 |---|---|---|---|
 | 1 | intake | `factory:intake` | task folder, `context.md`, `ticket.md`, `decisions.md` |
 | 2 | tier | `factory:tier` | `tier.md` |
-| 3 | understand | `factory:understand` (bug → root cause, feature → spec); may re-tier | `combined.md` or `spec.md` |
+| 3 | understand | `factory:understand` (bug → root cause, feature → spec); may re-tier; fallback below | `combined.md` or `spec.md` |
 | 4 | plan | `factory:plan` | `plan.md` |
 | 5 | build | `factory:build` | `impl/` |
 | 6 | simplify | `simplify` plus the case inventory (below); from T1 | `simplify/` |
@@ -45,6 +55,10 @@ for the steps it owns (`simplify`).
 
 - A step whose skill is not installed is logged `<step> skipped <date> - <skill> not available` and the run
   continues; the next step works from what exists. Never improvise a missing step's procedure.
+- **understand fallback** until `factory:understand` exists: for a bug, `superpowers:systematic-debugging`,
+  with its verdict written to `combined.md`; for a feature or improvement, `superpowers:brainstorming`, writing
+  `spec.md`. Log `ship done <date> status.md fallback: understand → <skill>`. Only when neither is installed, log
+  `understand skipped <date> - not available`.
 - **Re-tier** after understand when the root cause or the spec changes the size or risk: run `factory:tier`
   again before plan.
 - **Simplify**: before touching anything, list the test cases that cover the changed code

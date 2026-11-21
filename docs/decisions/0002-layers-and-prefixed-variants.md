@@ -23,7 +23,8 @@ tool.
 - Typical setups: a personal project declares just its own project layer (core → project). A company repo may
   declare a company layer and then the project layer (core → company → project). The company layer is an
   example, not a requirement.
-- A variant that a declared layer needs but cannot find stops the run (lost behaviour).
+- A missing variant means the core default applies for that step. At the start of every run `ship` prints and
+  logs a resolution table, one line per step with the skills it found, so a missing variant is visible.
 - Adoption: while a project still has its own end-to-end skill, its project layer decides whether a request
   goes to that skill or to `factory:ship`. Both work side by side until the old one is retired.
 
