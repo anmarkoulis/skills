@@ -61,6 +61,9 @@ The tier decides which stops are active ([stops.md](stops.md)). At an active sto
 print the path, a 3–5 line summary, ask **continue / change / stop here**. At an inactive stop, log
 `<step> done` and continue, but still show the summary in one line. Asks inside a step are never skipped.
 
+The tier is not known when intake ends, so run `tier` first and then apply the intake stop for that tier,
+showing `decisions.md` and `tier.md` together.
+
 ## Resume
 
 Read `ft last <folder>`, key on its step and state, and say which line you resumed from. If the file the line
