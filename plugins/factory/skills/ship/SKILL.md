@@ -89,7 +89,7 @@ names is missing, re-run that step instead of showing it.
 | `<step> stopped … awaiting answer` | that stop: show the file, ask again |
 | `<step> stopped` with any other reason | show the reason, ask, then re-run that step |
 | `<step> changed` | re-run that step, then its stop |
-| `<review\|verify> loop` | build, round N+1 |
+| `<review\|verify\|finalize> loop` | build, round N+1 |
 | `build done` | simplify (first round) or review (later rounds) |
 | `<step> done` or `<step> skipped` | the next step in the pipeline |
 | `ship …` | the step after the last non-`ship` line |
