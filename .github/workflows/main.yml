@@ -1,0 +1,21 @@
+name: main
+on:
+  push:
+    branches: [main]
+concurrency:
+  group: release
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+  lint:
+    uses: ./.github/workflows/lint.yml
+  release:
+    needs: [test, lint]
+    permissions: {} # uses only the App token
+    uses: ./.github/workflows/release.yml
+    secrets:
+      app-client-id: ${{ secrets.RELEASE_APP_CLIENT_ID }}
+      app-private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
