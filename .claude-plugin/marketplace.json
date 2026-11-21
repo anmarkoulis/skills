@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "anmarkoulis-skills",
+  "description": "Generic agent skills. Ships the factory plugin: a tiered ticket-to-PR pipeline that projects extend through declared override points.",
+  "owner": {
+    "name": "Antonis Markoulis",
+    "url": "https://github.com/anmarkoulis"
+  },
+  "plugins": [
+    {
+      "name": "factory",
+      "description": "A ticket-to-PR pipeline: a thin orchestrator that chains step skills, scales its stops by risk tier, keeps resumable state on disk, and lets companies and projects extend each step through declared override points.",
+      "version": "0.0.1",
+      "source": "./plugins/factory",
+      "license": "MIT",
+      "keywords": ["workflow", "pipeline", "orchestrator", "tiering", "verification", "retro"]
+    }
+  ]
+}

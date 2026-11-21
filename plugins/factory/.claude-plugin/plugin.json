@@ -1,0 +1,13 @@
+{
+  "name": "factory",
+  "description": "A ticket-to-PR pipeline: a thin orchestrator that chains step skills, scales its stops by risk tier, keeps resumable state on disk, and lets companies and projects extend each step through declared override points.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Antonis Markoulis",
+    "url": "https://github.com/anmarkoulis"
+  },
+  "homepage": "https://github.com/anmarkoulis/skills",
+  "repository": "https://github.com/anmarkoulis/skills",
+  "license": "MIT",
+  "keywords": ["workflow", "pipeline", "orchestrator", "tiering", "verification", "retro"]
+}
