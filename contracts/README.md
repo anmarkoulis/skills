@@ -1,7 +1,7 @@
 # Factory contracts
 
 What every step skill and every layer variant relies on. Decisions behind them:
-[docs/decisions/](../../../docs/decisions).
+[docs/decisions/](../docs/decisions).
 
 ## Task folder
 
