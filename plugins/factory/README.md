@@ -2,7 +2,14 @@
 
 A ticket-to-PR pipeline built as one orchestrator plus step skills. Decisions: [../../docs/decisions/](../../docs/decisions).
 
-Planned skills (none implemented yet):
+v0.1 vertical slice: `ship`, `intake`, `tier`, `plan`, `build`, `review`, `verify`, `finalize`, `retro`
+and `tracker` are written; the rest are planned. Shared rules: [contracts/](contracts).
+
+```
+/plugin install factory@anmarkoulis-skills
+```
+
+Skills:
 
 | Skill | Role |
 |---|---|

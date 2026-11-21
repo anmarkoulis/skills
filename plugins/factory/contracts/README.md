@@ -92,9 +92,11 @@ factory layers: acme, shop
 ```
 
 `ship` reads the line itself (it does not rely on the harness loading either file) and logs where it came from.
-No line means core only. For step `<step>`, the core skill `factory:<step>` runs with each declared layer's
-`<prefix>-<step>` skill applied on top, in order, if it exists. A variant whose prefix is not declared is never
-used.
+No line means core only. For step `<step>`, `ship` first collects the Overrides table of each declared layer's
+`<prefix>-<step>` skill, lowest first, then runs the core skill `factory:<step>` with those values, then runs
+the `extend` additions. A variant whose prefix is not declared is never
+used. A missing variant means the core default applies; `ship` logs a resolution table at the start of every
+run (`ship done <date> status.md resolution: …`) so it is visible.
 
 ## Override points
 
