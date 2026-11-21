@@ -1,0 +1,13 @@
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest] # macOS /bin/bash is 3.2, the oldest bash the scripts must run on
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: /bin/bash tests/factory-task.test.sh
+      - if: runner.os == 'Linux'
+        run: shellcheck plugins/factory/contracts/factory-task tests/*.sh
