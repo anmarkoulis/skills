@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Self-check for plugins/factory/contracts/factory-task. Run: bash tests/factory-task.test.sh
+# Self-check for contracts/factory-task. Run: bash tests/factory-task.test.sh
 # SC1010: 'done' here is a status.md state passed as an argument, not the loop keyword.
 # shellcheck disable=SC1010
 set -euo pipefail
-ft="$(cd "$(dirname "$0")/.." && pwd)/plugins/factory/contracts/factory-task"
+ft="$(cd "$(dirname "$0")/.." && pwd)/contracts/factory-task"
 tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
 git -C "$tmp" init -q
 fail() { echo "FAIL: $*" >&2; exit 1; }

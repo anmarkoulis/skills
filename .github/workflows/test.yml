@@ -13,4 +13,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: /bin/bash tests/factory-task.test.sh
       - if: runner.os == 'Linux'
-        run: shellcheck plugins/factory/contracts/factory-task tests/*.sh
+        run: shellcheck contracts/factory-task tests/*.sh
