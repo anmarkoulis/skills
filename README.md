@@ -2,7 +2,8 @@
 
 Generic agent skills for Claude Code (OpenCode and Codex planned), published as a plugin marketplace.
 
-> **Status: design phase.** No skills are implemented yet. Settled decisions are recorded as ADRs in
+> **Status: v0.1 in progress.** The first vertical slice of the `factory` plugin is written and not yet
+> tried on real tickets. Settled decisions are recorded as ADRs in
 > [docs/decisions/](docs/decisions); the v0.1 spec and the work on each skill are tracked in
 > [GitHub Issues](https://github.com/anmarkoulis/skills/issues).
 
