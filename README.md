@@ -1,9 +1,10 @@
 # skills
 
-Generic agent skills for Claude Code (and OpenCode), published as a plugin marketplace.
+Generic agent skills for Claude Code (OpenCode and Codex planned), published as a plugin marketplace.
 
-> **Status: design phase.** No skills are implemented yet. The design lives in
-> [docs/design.md](docs/design.md); open questions are listed at its end.
+> **Status: design phase.** No skills are implemented yet. Settled decisions are recorded as ADRs in
+> [docs/decisions/](docs/decisions); the v0.1 spec and the work on each skill are tracked in
+> [GitHub Issues](https://github.com/anmarkoulis/skills/issues).
 
 ## Plugins
 
@@ -24,15 +25,14 @@ The plugin is generic: nothing in it knows about your tracker, your test command
 You add those in layers you own:
 
 ```
-factory (this repo)                 generic steps, contracts, tier engine
-  ├─ your personal plugin (me-*)    what your own projects share (tracker, merge policy)
-  │    └─ project variants          one repo's specifics (test suites, agents)
-  └─ your company plugin (acme-*)   what your company's repos share
-       └─ project variants
+factory (this repo)        generic steps, contracts, tier engine
+  └─ company (optional)    what a company's repos share (acme-*)
+       └─ project          one repo's specifics: test suites, agents (myproj-*)
 ```
 
-Each layer names its skills `<prefix>-<step>` and says it extends the core step. A repo declares its layers in
-its `AGENTS.md`. See [docs/design.md](docs/design.md).
+A repo declares zero or more layers, lowest first, in its `AGENTS.md`. Each layer names its skills
+`<prefix>-<step>` and says it extends the core step. See
+[ADR 2](docs/decisions/0002-layers-and-prefixed-variants.md).
 
 ## Dependencies
 
