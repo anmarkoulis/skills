@@ -132,7 +132,23 @@ First cut of each step's override points *(open: defaults and allowed operations
 ## 6. Tiers
 
 `tier` runs after intake and again after understand when the work changed shape. It proposes a tier with one
-line of reasoning. *(open: confirmation policy; proposal: the user confirms T2 only, T0 and T1 are announced.)*
+line of reasoning. Default: the user confirms T2; T0 and T1 are announced and the user can interrupt.
+
+**Tier policy** has three override points: which tiers need confirmation, minimum tiers for paths or change
+types, and stops per tier (a layer may add or remove stops; a removal carries a logged reason). Evidence rules
+are not part of it and cannot be changed.
+
+Who sets it, lowest to highest:
+
+1. the core defaults (this document);
+2. the organisation and project layers: the **repo default**, committed with the repo;
+3. the **user's own override**, which applies to that user only and is never committed to the repo;
+4. **the current run**: the user just asks ("treat this as T2", "also stop at verify"); `tier.md` records it as
+   set by the user and `ship` applies it at once.
+
+Asking for a lasting change ("always confirm the tier here") makes the factory propose the edit to the right
+file, the repo default or the user's own override, shown as a diff and written only after a yes. A rule never
+lives only in chat or memory. *(open: where the user's own override lives, and its bounds; open question 1.)*
 
 **Signals (core):** reversibility (one-way or two-way door); sensitive areas (from the layers); ambiguity (known
 cause or design vs not); verification available (does a cheap, trustworthy check exist?); size.
@@ -142,7 +158,7 @@ cause or design vs not); verification available (does a cheap, trustworthy check
 
 | Controls | T0 trivial | T1 standard | T2 risky |
 |---|---|---|---|
-| Stops | intake and PR | intake, plan, review, PR, retro | every stop |
+| Stops (core default; layers only add) | none | plan (plan and execution method) | intake, understand, plan, review, verify, PR |
 | `debugging` | one diagnosis | one diagnosis | two blind diagnoses, reconciled |
 | `spec` | premise check | grill when no spec exists | full grill and question ledger |
 | `build` method (recommended) | inline | by plan size | subagents per task, specialist agents |
@@ -152,7 +168,8 @@ cause or design vs not); verification available (does a cheap, trustworthy check
 | `finalize` merge | layer policy | layer policy | a person merges |
 | `retro` | only on friction | short | full, with checks proposed |
 
-*(open: the stop rows, in particular T1.)*
+The core ships the loosest acceptable stops because stop overrides only tighten: a layer adds stops, it never
+removes one. Retro always asks before applying anything, whatever the tier.
 
 Autonomy follows verification: a step can run without a stop only where a cheap, trustworthy check covers it.
 
@@ -193,8 +210,11 @@ Review run inline is the author reviewing their own work; it is recorded as "not
 
 ### Task folder
 
-One folder per piece of work, at the location `intake` resolves (an override point). If a worktree is created,
-the folder moves into it.
+One folder per piece of work, at the location `intake` resolves (an override point). Default:
+`.factory/<slug>/` in the working tree, following superpowers' `.superpowers/sdd/` pattern: `.factory/` holds a
+self-ignoring `.gitignore` (`*`), so the folder stays out of `git status` without touching any tracked file. It
+is not under `.git/`, because Claude Code denies agent writes there. One script resolves the location, so no two
+skills can disagree about it. If a worktree is created, the folder moves into it.
 
 | File | Written by | Content |
 |---|---|---|
@@ -241,7 +261,8 @@ Every write needs the user's yes.
 
 ## 11. Harnesses
 
-Claude Code is the reference. OpenCode is supported in v1. Where the factory uses a harness feature (asking a
+v0.1 targets Claude Code only. OpenCode and Codex come later, once the contracts have shipped real tickets.
+Where the factory uses a harness feature (asking a
 structured question, dispatching or monitoring a subagent), the skill names the feature, and a short note per
 harness maps it. Without a feature the step degrades to inline or to a plain question.
 
@@ -255,15 +276,31 @@ harness maps it. Without a feature the step degrades to inline or to a plain que
 - Anthropic's posts on how the Claude Code team reviews and verifies code: risk tiers decided by the change, "an agent's approval never counts as a person's", review rules read from the base branch.
 - Addy Osmani on autonomy levels and software factories: autonomy follows verification.
 
+## Adoption
+
+A repo moves to the factory at its own pace. While a project still has its own end-to-end skill (for example a
+`ship-issue`), its project layer decides which orchestrator a request goes to, the old one or `factory:ship`,
+and both work side by side until the old one is retired.
+
+## Decisions
+
+| # | Decision | Date |
+|---|---|---|
+| 1 | Tier confirmation default: confirm T2, announce T0 and T1 | 2026-11-21 |
+| 2 | Core stop defaults are the minimum (T0 none, T1 plan, T2 six stops); layers only add stops | 2026-11-21 |
+| 3 | Task folder default `.factory/<slug>/` with a self-ignoring `.gitignore`, resolved by one script | 2026-11-21 |
+| 4 | v0.1 is Claude Code only; OpenCode and Codex later | 2026-11-21 |
+| 5 | Existing end-to-end skills keep working; the project layer routes to old or new | 2026-11-21 |
+| 6 | Tier policy: repo default from the layers, a per-user override on top, per-run asks on top of that; lasting changes go to a file after a yes | 2026-11-21 |
+| 7 | Tier policy override points: confirmation, minimum tiers, stops per tier (add or remove, removal logged) | 2026-11-21 |
+| 8 | `plan` and `review` are thin core skills | 2026-11-21 |
+| 9 | Agent routing is declared in the project's `-build` Overrides; `plan` writes the chosen agent onto each task | 2026-11-21 |
+| 10 | The author's personal layer lives in its own private repo, prefix `ant` | 2026-11-21 |
+| 11 | A user's own override lives in the repo's `CLAUDE.local.md` (one repo) or the user-level instruction file (all repos); the repo-specific one wins | 2026-11-21 |
+| 12 | A user override may add confirmations and stops and raise tiers freely; going below the repo's minimum tier or dropping a required stop works for one run only, on request, logged | 2026-11-21 |
+| 13 | Build a vertical slice first: contracts, `ship`, `intake`, `tier`, `plan`, `build`, `review`, `verify`, `finalize`, `retro`, `tracker`; then `understand`, `spec`, `debugging`, `qa-tests`, `manual-test`, `delegate`, `setup` | 2026-11-21 |
+| 14 | Each skill's override-point defaults are settled when the skill is built, reviewed in its PR | 2026-11-21 |
+
 ## Open questions
 
-1. Confirmation policy for the tier: who confirms which tiers.
-2. The stops per tier, in particular T1.
-3. Defaults and allowed operations for every override point (section 5).
-4. Where the task folder lives by default.
-5. Whether `plan` and `review` stay thin skills or become rules inside `ship`.
-6. How a layer declares agent routing for plan tasks (for example "tasks touching migrations go to the
-   migrations agent").
-7. Packaging of the OpenCode side (plugin folder, agent conversion).
-8. The leak check: what it greps for and where it runs.
-9. Build order of the skills, and the first real ticket to run end to end.
+1. Whether the repo needs a leak check, and when (see principle 8).
