@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# The factory's single source of truth for task folders and status.md lines.
+#
+#   factory-task [-C DIR] path SLUG [BASE]
+#       Ensure <repo root>/<BASE>/<SLUG>/ (BASE defaults to .factory) with an empty
+#       status.md, and print its absolute path. A BASE this script creates gets a self-ignoring
+#       .gitignore ("*"), so the folder stays out of `git status` without touching any
+#       tracked file. The folder lives in the working tree, not under .git/, because
+#       Claude Code denies agent writes there.
+#   factory-task log FOLDER STEP STATE FILE [REASON...]
+#       Append one status.md line: <step> <state> <YYYY-MM-DD> <file> [<reason>].
+#   factory-task last FOLDER
+#       Print the last status.md line (empty when there is none). Resume keys on it.
+#
+# -C DIR runs as if started in DIR, like git -C, so a caller can target a worktree.
+# Pattern from superpowers' sdd-workspace.
+set -euo pipefail
+
+die() { echo "factory-task: $*" >&2; exit 2; }
+
+if [ "${1:-}" = "-C" ]; then
+  [ -d "${2:-}" ] || die "bad -C directory: ${2:-}"
+  cd "$2"; shift 2
+fi
+
+cmd=${1:-}; shift || true
+case "$cmd" in
+  path)
+    [ $# -ge 1 ] && [ $# -le 2 ] || die "usage: factory-task [-C DIR] path SLUG [BASE]"
+    slug=$1; base_rel=${2:-.factory}
+    [[ $slug =~ ^[a-z0-9][a-z0-9._-]*$ ]] || die "slug must be lowercase letters, digits, '.', '_' or '-': $slug"
+    case "/$base_rel/" in //*|*/../*) die "BASE must be a path inside the repo: $base_rel" ;; esac
+    root=$(git rev-parse --show-toplevel 2>/dev/null) || die "not inside a git working tree: $PWD"
+    base="$root/$base_rel"
+    # Only a base this script creates gets the self-ignoring .gitignore; an existing folder is never hidden.
+    if [ ! -e "$base" ]; then mkdir -p "$base"; printf '*\n' > "$base/.gitignore"; fi
+    mkdir -p "$base/$slug"
+    touch "$base/$slug/status.md"
+    (cd "$base/$slug" && pwd)
+    ;;
+  log)
+    [ $# -ge 4 ] || die "usage: factory-task log FOLDER STEP STATE FILE [REASON...]"
+    folder=$1 step=$2 state=$3 file=$4; shift 4; reason="$*"
+    [ -f "$folder/status.md" ] || die "no status.md in $folder (run: factory-task path SLUG)"
+    [[ $step =~ ^[a-z][a-z0-9-]*$ ]] || die "step must be a lowercase name: $step"
+    case "$state" in
+      done|stopped|changed) ;;
+      loop) [[ $reason == "→build "* ]] || die "loop needs a reason starting with '→build '" ;;
+      skipped) [ -n "$reason" ] || die "skipped needs a reason" ;;
+      *) die "state must be done|stopped|changed|loop|skipped: $state" ;;
+    esac
+    [ -n "$file" ] || die "file must not be empty"
+    [[ $file != *[[:space:]]* ]] || die "file must not contain whitespace: $file"
+    # A newline would let one call write a second, forged line that resume then trusts.
+    case "$reason" in *$'\n'*|*$'\r'*) die "reason must be one line" ;; esac
+    line="$step $state $(date +%F) $file${reason:+ $reason}"
+    printf '%s\n' "$line" >> "$folder/status.md"
+    printf '%s\n' "$line"
+    ;;
+  last)
+    [ $# -eq 1 ] || die "usage: factory-task last FOLDER"
+    [ -f "$1/status.md" ] || die "no status.md in $1"
+    grep -v '^[[:space:]]*$' "$1/status.md" | tail -n 1 || true
+    ;;
+  *) die "usage: factory-task [-C DIR] path SLUG [BASE] | log FOLDER STEP STATE FILE [REASON...] | last FOLDER" ;;
+esac
