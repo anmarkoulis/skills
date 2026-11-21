@@ -1,6 +1,6 @@
 # factory
 
-A ticket-to-PR pipeline built as one orchestrator plus step skills. Design: [../../docs/design.md](../../docs/design.md).
+A ticket-to-PR pipeline built as one orchestrator plus step skills. Decisions: [../../docs/decisions/](../../docs/decisions).
 
 Planned skills (none implemented yet):
 
