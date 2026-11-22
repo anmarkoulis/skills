@@ -1,3 +1,9 @@
+## [0.4.0](https://github.com/anmarkoulis/skills/compare/v0.3.0...v0.4.0) (2026-11-22)
+
+### Features
+
+* cap the build-review-verify loop ([#47](https://github.com/anmarkoulis/skills/issues/47)) ([b76d586](https://github.com/anmarkoulis/skills/commit/b76d5868fd87644cb98468950262f3566fc7729d))
+
 ## [0.3.0](https://github.com/anmarkoulis/skills/compare/v0.2.1...v0.3.0) (2026-11-22)
 
 ### Features
