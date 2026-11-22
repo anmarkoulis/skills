@@ -2,7 +2,7 @@
 
 Generic agent skills for Claude Code (OpenCode and Codex planned), packaged as one plugin with its own marketplace.
 
-> **Status: v0.1 in progress.** The first vertical slice of `factory` is written and not yet
+> **Status: v0.1 in progress.** All v0.1 skills of `factory` are written and not yet
 > tried on real tickets. Settled decisions are recorded as ADRs in
 > [docs/decisions/](docs/decisions); the v0.1 spec and the work on each skill are tracked in
 > [GitHub Issues](https://github.com/anmarkoulis/skills/issues).
@@ -14,8 +14,7 @@ tier, understand, plan, build, review, verify, finalize, retro), scales its stop
 resumable state on disk, and lets a company and a project extend each step through declared override points.
 Shared rules: [contracts/](contracts).
 
-v0.1 vertical slice: `ship`, `intake`, `tier`, `plan`, `build`, `review`, `verify`, `finalize`, `retro`
-and `tracker` are written; the rest are planned.
+v0.1: all the skills below are written.
 
 | Skill | Role |
 |---|---|
@@ -36,6 +35,9 @@ and `tracker` are written; the rest are planned.
 | `tracker` | Tracker interface; default implementation is GitHub Issues |
 | `delegate` | Worker levels: specialist agent, generic worker, inline |
 | `setup` | Declares a repo's layers and scaffolds variant skills |
+
+Agents (optional helpers in [agents/](agents), picked by `delegate`): `task-reviewer`, `bug-diagnoser`,
+`qa-runner`, `manual-tester`. Without them, steps run the same brief on a generic worker or inline.
 
 ## Install
 

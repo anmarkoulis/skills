@@ -26,7 +26,7 @@ bash <this folder>/factory-task path <slug> [<base>]     # prints the absolute p
 | `ticket.md`, `raw/` | intake via `tracker` | ticket summary; untouched tool output |
 | `decisions.md` | intake, later steps | decided / rejected / confidence with the named missing piece |
 | `tier.md` | tier | tier, signals, rules matched, reasoning, re-tiers |
-| `combined.md` or `spec.md`, `spec-questions.md` | understand | root-cause verdict, or spec plus question ledger |
+| `combined.md`, `debugging/`, or `spec.md`, `spec-questions.md` | understand, via `debugging` or `spec` | root-cause verdict, or spec plus question ledger |
 | `plan.md` | plan | the plan; never committed |
 | `impl/` | build | brief, red and green logs, `prod.patch`, `status.md` |
 | `verify.md`, `gaps.md`, `verify/` | verify | regression map, numbered runs, what is not proven |

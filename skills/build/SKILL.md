@@ -24,8 +24,7 @@ reason (the tier's recommendation, then the plan's size):
 | Subagents | one implementer per task, plus a reviewer per task at T2 | `superpowers:subagent-driven-development` |
 | One background agent | a single agent runs the whole plan | — |
 
-Each worker is picked by the worker levels (ADR 5): the agent the plan task names, then the **agent routing**
-from this step's overrides, then a generic subagent, then inline. Log every fallback as `ship … fallback:`.
+Pick each worker (roles `implementer` and `reviewer`) with `factory:delegate`, which logs every fallback.
 If the user wants plan changes instead, send them back to `plan`.
 
 ## 2. Send every method the same brief
@@ -66,5 +65,3 @@ The result is a verdict: `success`, `flawed` (re-dispatch with the failing evide
 | test command | the repo's documented test command (README, `AGENTS.md`, `Makefile`, package scripts); ask if none | `set` |
 | lint command | the repo's documented linter; none if there is none | `set` |
 | extra brief rules | none | `extend` |
-| agent routing | none: generic subagents | `set` (role or path → agent name) |
-| implementer and reviewer agents | generic subagent | `set` |

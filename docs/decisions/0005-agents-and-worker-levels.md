@@ -9,8 +9,8 @@ resolve, and some harnesses have no subagents at all. A step must not depend on 
 
 ## Decision
 
-- `delegate` defines one contract and three ways to run it: (1) a named specialist agent a layer names and that
-  resolves; (2) a generic worker with the step's brief plus the procedure the specialist would have carried;
+- `delegate` defines one contract and three ways to run it: (1) a named specialist agent a layer names, or the plugin's
+  own agent for the role, and that resolves; (2) a generic worker with the step's brief plus the procedure the specialist would have carried;
   (3) the current session, inline.
 - The contract is identical at every level: the same inputs and a result file in the same shape. Every fallback
   is logged in `status.md`. A named agent that cannot be found falls back to the next level (lost speed or
@@ -19,7 +19,8 @@ resolve, and some harnesses have no subagents at all. A step must not depend on 
   generic worker, then inline.
 - The agent definition carries who (tools, model, domain rules); the step's brief carries what (goal, scope,
   stopping condition, result file). The agent's model stands unless the tier needs a stronger one.
-- Agent routing is declared in the project's `-build` Overrides; `plan` writes the chosen agent onto each task.
+- Agent routing is declared in the project's `-delegate` Overrides (amended 2026-11-21: was `-build`); `plan`
+  writes the chosen agent onto each task.
 - A review run inline is the author reviewing their own work and is recorded as "not independent".
 - Every worker ends with one verdict: `success`, `flawed`, `blocked` or `manual`, plus its evidence.
 
