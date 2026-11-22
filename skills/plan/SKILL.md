@@ -31,7 +31,8 @@ Done when: <command> passes.
 ```
 
 - One task per independently testable change, in order. Every task names its failing test first.
-- **Agent per task:** use the agent routing `build`'s Overrides declare for the files or role; else `generic`.
+- **Agent per task:** use the agent routing from `factory:delegate`'s overrides for the files or role;
+  else `generic`.
 - Recommend an execution method for `build` (inline, subagents, one background agent) from the tier and the
   plan's size, with one line of reasoning.
 

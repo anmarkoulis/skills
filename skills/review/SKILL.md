@@ -29,10 +29,12 @@ person's.
 - **Rules:** the **review rules file** (default `REVIEW.md` at the repo root), read from the base branch
   (`git show <base>:REVIEW.md`), so the change under review cannot edit its own rules.
 - Give the reviewer the diff against the base sha from `decisions.md`, `ticket.md`, `plan.md` and the rules.
+- **Who runs it** at T1 and T2: a worker picked with `factory:delegate`, role `reviewer`, result file
+  `review/deep.md` (and `review/security.md` at T2). Inline is the not-independent case above.
 
 ## 3. Agree and fix
 
-Write `review.md`: reviewer, depth, independent or not, and each finding with severity and `file:line`. Show
+Write `review.md`, merging the result files: reviewer, depth, independent or not, and each finding with severity and `file:line`. Show
 the findings with the scope table from [../ship/stops.md](../ship/stops.md); the user keeps or drops each. Dropped
 findings go to `decisions.md` with the reason.
 
