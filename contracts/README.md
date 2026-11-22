@@ -93,7 +93,7 @@ factory layers: acme, shop
 
 `ship` reads the line itself (it does not rely on the harness loading either file) and logs where it came from.
 No line means core only. For step `<step>`, `ship` first collects the Overrides table of each declared layer's
-`<prefix>-<step>` skill, lowest first, then runs the core skill `factory:<step>` with those values, then runs
+`<prefix>-<step>` skill, lowest first, then runs the core skill `anmarkoulis:<step>` with those values, then runs
 the `extend` additions. A variant whose prefix is not declared is never
 used. A missing variant means the core default applies; `ship` logs a resolution table at the start of every
 run (`ship done <date> status.md resolution: …`) so it is visible.
@@ -113,7 +113,7 @@ skill it extends:
 ```markdown
 ---
 name: shop-verify
-description: Extends factory:verify for the shop repo with its test commands and staging quirks.
+description: Extends anmarkoulis:verify for the shop repo with its test commands and staging quirks.
 ---
 | Point | This layer |
 |---|---|

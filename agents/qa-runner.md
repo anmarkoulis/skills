@@ -1,6 +1,6 @@
 ---
 name: qa-runner
-description: Runs a repo's acceptance or end-to-end suite for one touched area and writes verify/qa.md plus raw logs. Never edits repo files. Optional helper for factory:qa-tests.
+description: Runs a repo's acceptance or end-to-end suite for one touched area and writes verify/qa.md plus raw logs. Never edits repo files. Optional helper for anmarkoulis:qa-tests.
 tools: Bash, Read, Write
 model: sonnet
 ---

@@ -1,6 +1,6 @@
 ---
 name: manual-tester
-description: Drives the running app through a case list, one script per flow, and writes verify/manual.md plus screenshots or transcripts. Never edits repo files. Optional helper for factory:manual-test.
+description: Drives the running app through a case list, one script per flow, and writes verify/manual.md plus screenshots or transcripts. Never edits repo files. Optional helper for anmarkoulis:manual-test.
 tools: Bash, Read, Write
 model: sonnet
 ---

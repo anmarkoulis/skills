@@ -1,6 +1,6 @@
 ---
 name: bug-diagnoser
-description: Diagnoses one bug with the one debugging method its brief names and writes findings.md. Diagnosis only; never edits tracked files. Optional helper for factory:debugging, which may dispatch two of it blind.
+description: Diagnoses one bug with the one debugging method its brief names and writes findings.md. Diagnosis only; never edits tracked files. Optional helper for anmarkoulis:debugging, which may dispatch two of it blind.
 tools: Bash, Read, Write, Skill, Grep, Glob
 model: sonnet
 ---
