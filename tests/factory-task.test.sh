@@ -42,6 +42,7 @@ no bash "$ft" log "$d" plan done plan.md "$(printf 'x\ry')"
 no bash "$ft" log "$d" plan done "$(printf 'a\nb')"
 no bash "$ft" log "$d" plan done ""
 no bash "$ft" log "$d" plan done "$(printf 'a\tb')"
+no bash "$ft" log "$d" plan done 2026-11-22
 printf '\n  \n' >> "$d/status.md"
 [ "$(bash "$ft" last "$d")" = "build done $(date +%F) impl/status.md round 2 ← review: missing null check" ] || fail "last: $(bash "$ft" last "$d")"
 [ "$(grep -c '[^[:space:]]' "$d/status.md")" -eq 3 ] || fail "rejected lines were written"

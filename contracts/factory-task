@@ -51,6 +51,8 @@ case "$cmd" in
     esac
     [ -n "$file" ] || die "file must not be empty"
     [[ $file != *[[:space:]]* ]] || die "file must not contain whitespace: $file"
+    # The script writes the date itself, so a date here is always a caller mistake.
+    [[ ! $file =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || die "file looks like a date; the script adds the date: $file"
     # A newline would let one call write a second, forged line that resume then trusts.
     case "$reason" in *$'\n'*|*$'\r'*) die "reason must be one line" ;; esac
     line="$step $state $(date +%F) $file${reason:+ $reason}"

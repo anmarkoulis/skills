@@ -42,6 +42,9 @@ Every assumption about an external library or API (a function exists, a flag beh
 against its docs or the pinned source before the plan is shown. Record each as `checked: <where>` in the task, or
 remove the task's dependency on it.
 
+Two pins that load each other (a plugin and its host, a preset and the bundled writer) are checked together:
+install them side by side and run the smallest command that uses both.
+
 ## 3. Post it
 
 Ask before posting. Then `anmarkoulis:tracker` `post plan comment` with `plan.md` (it updates an existing plan

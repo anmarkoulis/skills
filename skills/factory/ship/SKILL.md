@@ -33,6 +33,9 @@ is three directories above this skill's base directory.
 2. **Run the core step** with the collected values applied: invoke `anmarkoulis:<step>` with the Skill tool and give
    it the task folder's absolute path, the tier and the collected overrides. A `set` value replaces the default;
    a `replace` swaps the mechanics of that point only.
+   If `anmarkoulis:<step>` is not in the session's skills but `<plugin root>/skills/factory/<step>/SKILL.md`
+   exists, follow that file as the step and log
+   `ship done <date> status.md fallback: factory skills read from disk (plugin not loaded)`.
 3. **Run `extend` additions** after the core's own steps, in layer order.
 
 The step writes its own files and its own `status.md` line; `ship` logs the lines for the stops and for the
