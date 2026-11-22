@@ -25,10 +25,11 @@ consumers. Run each required level; skip one only with a written reason, shown a
 
 - **L1, always:** the **L1 commands** (default: the repo's documented test, lint and build commands) for the
   touched code and every caller in the map. Tests that need an emulator or a container run against it.
-- **L2, acceptance suite:** `factory:qa-tests` when installed, else the **L2 command** a layer sets. Neither:
-  record `L2 not applicable: no acceptance suite declared` in `gaps.md`.
-- **L3, manual:** `factory:manual-test` when installed, else the **L3 procedure** a layer sets, else a script
-  the user runs with you, step by step. Required for security, outbound-call and user-facing changes.
+- **L2, acceptance suite:** the **L2 command** (default `factory:qa-tests`). When it reports
+  `not applicable`, copy the reason into `gaps.md` as `L2 not applicable: <reason>`.
+- **L3, manual:** the **L3 procedure** (default `factory:manual-test`); a `not applicable` goes to `gaps.md`
+  as `L3 not applicable: <reason>`. Required for security, outbound-call and
+  user-facing changes.
 - **L4, after deploy:** staging or production retests and monitoring. List them as follow-ups; never run them
   unasked.
 - **A/B (T2):** run the new tests on the base without the production change and show they fail, using the **A/B
@@ -58,8 +59,8 @@ staging, production data). Add items found but out of scope, one line each.
 | Point | Default | Allowed |
 |---|---|---|
 | L1 commands | the repo's documented test, lint and build commands | `set` |
-| L2 command | `factory:qa-tests` if installed, else none | `set` |
-| L3 procedure | `factory:manual-test` if installed, else a guided script with the user | `set` |
+| L2 command | `factory:qa-tests` | `set` |
+| L3 procedure | `factory:manual-test` (it falls back to a guided script with the user) | `set` |
 | outside consumers | none known; grep what the map finds | `extend` |
 | A/B mechanism | patch out the production diff, run, re-apply | `replace` |
 | environment quirks | none | `extend` |
