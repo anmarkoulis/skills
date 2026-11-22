@@ -1,3 +1,9 @@
+## [0.5.0](https://github.com/anmarkoulis/skills/compare/v0.4.0...v0.5.0) (2026-11-22)
+
+### Features
+
+* add code-schematic skill ([#48](https://github.com/anmarkoulis/skills/issues/48)) ([88a8cfa](https://github.com/anmarkoulis/skills/commit/88a8cfa8a8df31377192a344b7b9e07774c0a5b5))
+
 ## [0.4.0](https://github.com/anmarkoulis/skills/compare/v0.3.0...v0.4.0) (2026-11-22)
 
 ### Features
