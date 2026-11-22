@@ -20,6 +20,7 @@ Ask first. Then, with the **git workflow** (default: plain git and `gh`):
 - Stage the changed files by name, never `git add -A`. Follow the repo's commit conventions
   (`CONTRIBUTING.md`, `AGENTS.md`, recent history); the user's own instructions win.
 - Push the branch from `decisions.md`. Never push to the default branch.
+- In a worktree, run every git command as `git -C <worktree>`; the session's cwd may be another checkout.
 
 ## 3. PR
 
