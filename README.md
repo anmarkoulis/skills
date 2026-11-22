@@ -43,6 +43,16 @@ v0.1: all the skills below are written.
 Agents (optional helpers in [agents/](agents), picked by `delegate`): `task-reviewer`, `bug-diagnoser`,
 `qa-runner`, `manual-tester`. Without them, steps run the same brief on a generic worker or inline.
 
+## General skills
+
+Usable on their own, outside the factory (`skills/generic/`).
+
+| Skill | Role |
+|---|---|
+| `explain` | Every explanation is a worked example traced through the real lines |
+| `code-schematic` | One code path at one git ref: a Mermaid flow plus layered pseudo-code |
+| `deep-review` | Intent, walkthrough and findings for a PR or diff, using installed review skills as lenses; writes local files, never posts |
+
 ## Install
 
 ```

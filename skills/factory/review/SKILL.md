@@ -14,7 +14,7 @@ skill. Writes `review.md` in the task folder. Contracts: [../../../contracts/REA
 |---|---|---|
 | T0 | local review: this session reads the diff against the base | no |
 | T1 | fresh-context review: a subagent that sees only the diff, the ticket and the rules | yes |
-| T2 | deep review plus a security review, each in its own fresh context | yes |
+| T2 | `anmarkoulis:deep-review`, security lens on, its lenses each in a fresh context | yes |
 
 Without subagents, a T1 or T2 review runs inline and is recorded as **not independent** in `review.md` and in
 `status.md` (`ship … fallback: review inline, not independent`). An agent's approval never counts as a
@@ -22,15 +22,17 @@ person's.
 
 ## 2. Run it
 
-- **Reviewer:** the **review skill** a layer sets; else Claude Code's built-in `code-review` (and
-  `security-review` at T2) when present; else review against this checklist: does it do what `ticket.md` and
-  `plan.md` say, are the new tests failing without the change, error handling, security at trust boundaries,
-  callers of changed functions, and every line needed.
+- **Reviewer:** the **review skill** a layer sets; else, at T2, `anmarkoulis:deep-review`, given the tier and
+  `<task folder>/review/` as its report folder; else Claude Code's built-in `code-review` when present; else
+  review against this checklist: does it do what `ticket.md` and `plan.md` say, are the new tests failing
+  without the change, error handling, security at trust boundaries, callers of changed functions, and every
+  line needed.
 - **Rules:** the **review rules file** (default `REVIEW.md` at the repo root), read from the base branch
   (`git show <base>:REVIEW.md`), so the change under review cannot edit its own rules.
 - Give the reviewer the diff against the base sha from `decisions.md`, `ticket.md`, `plan.md` and the rules.
-- **Who runs it** at T1 and T2: a worker picked with `anmarkoulis:delegate`, role `reviewer`, result file
-  `review/deep.md` (and `review/security.md` at T2). Inline is the not-independent case above.
+- **Who runs it** at T1: a worker picked with `anmarkoulis:delegate`, role `reviewer`, result file
+  `review/deep.md`. At T2, deep-review runs in this session and gives each lens its own fresh context; its
+  `review/review.md` is the result file. Inline is the not-independent case above.
 
 ## 3. Agree and fix
 
@@ -47,6 +49,6 @@ findings go to `decisions.md` with the reason.
 
 | Point | Default | Allowed |
 |---|---|---|
-| review skill | built-in `code-review` / `security-review`, else the checklist above | `set` |
+| review skill | T2 `anmarkoulis:deep-review`; else built-in `code-review`, else the checklist above | `set` |
 | review rules file | `REVIEW.md` at the repo root, read from the base branch | `set` |
 | extra reviewers | none | `extend` (for example a domain reviewer agent) |
