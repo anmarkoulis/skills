@@ -1,6 +1,6 @@
 ---
 name: task-reviewer
-description: Read-only review of one task's diff, or the whole branch, against its brief and the review rules; writes the review result file. Never edits repo files. Optional helper for factory:build (reviewer per task) and factory:review.
+description: Read-only review of one task's diff, or the whole branch, against its brief and the review rules; writes the review result file. Never edits repo files. Optional helper for anmarkoulis:build (reviewer per task) and anmarkoulis:review.
 tools: Bash, Read, Write, Grep, Glob
 model: sonnet
 ---

@@ -1,6 +1,6 @@
 {
-  "name": "factory",
-  "description": "A ticket-to-PR pipeline: a thin orchestrator that chains step skills, scales its stops by risk tier, keeps resumable state on disk, and lets companies and projects extend each step through declared override points.",
+  "name": "anmarkoulis",
+  "description": "Antonis Markoulis's agent skills: the factory, a tiered ticket-to-PR pipeline that projects extend through declared override points, plus general skills.",
   "version": "0.1.0",
   "author": {
     "name": "Antonis Markoulis",
@@ -16,5 +16,24 @@
     "tiering",
     "verification",
     "retro"
+  ],
+  "skills": [
+    "./skills/factory/build",
+    "./skills/factory/debugging",
+    "./skills/factory/delegate",
+    "./skills/factory/finalize",
+    "./skills/factory/intake",
+    "./skills/factory/manual-test",
+    "./skills/factory/plan",
+    "./skills/factory/qa-tests",
+    "./skills/factory/retro",
+    "./skills/factory/review",
+    "./skills/factory/setup",
+    "./skills/factory/ship",
+    "./skills/factory/spec",
+    "./skills/factory/tier",
+    "./skills/factory/tracker",
+    "./skills/factory/understand",
+    "./skills/factory/verify"
   ]
 }

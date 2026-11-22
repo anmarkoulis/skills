@@ -1,8 +1,10 @@
 # Working on this repo
 
-The repo root is the `factory` plugin root: `.claude-plugin/` holds both `plugin.json` and the one-plugin
-`marketplace.json`, so everything under `skills/` ships. Plugin agents, when they come, go in `agents/` at
-the root. Skills for working on this repo itself go in `.claude/skills/`, which does not ship.
+The repo root is the `anmarkoulis` plugin root: `.claude-plugin/` holds both `plugin.json` and the one-plugin
+`marketplace.json`. Skills are grouped by folder: the factory pipeline in `skills/factory/<skill>/`, general
+skills in `skills/generic/<skill>/` ([ADR 9](docs/decisions/0009-one-personal-plugin.md)). A skill ships only
+once its path is in the `skills` list in `plugin.json`. General skills do not reuse a factory step's name.
+Plugin agents go in `agents/` at the root. Skills for working on this repo itself go in `.claude/skills/`, which does not ship.
 
 ## Editing a skill
 

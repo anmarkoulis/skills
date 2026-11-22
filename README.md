@@ -2,14 +2,15 @@
 
 Generic agent skills for Claude Code (OpenCode and Codex planned), packaged as one plugin with its own marketplace.
 
-> **Status: v0.1 in progress.** All v0.1 skills of `factory` are written and not yet
+> **Status: v0.1 in progress.** All v0.1 skills of the factory are written and not yet
 > tried on real tickets. Settled decisions are recorded as ADRs in
 > [docs/decisions/](docs/decisions); the v0.1 spec and the work on each skill are tracked in
 > [GitHub Issues](https://github.com/anmarkoulis/skills/issues).
 
 ## factory
 
-This repo is the `factory` plugin: a ticket-to-PR pipeline. A thin orchestrator chains step skills (intake,
+This repo is the `anmarkoulis` plugin. Its skills are grouped by folder under `skills/`; the first group,
+`skills/factory/`, is the factory: a ticket-to-PR pipeline. A thin orchestrator chains step skills (intake,
 tier, understand, plan, build, review, verify, finalize, retro), scales its stops by a risk tier, keeps
 resumable state on disk, and lets a company and a project extend each step through declared override points.
 Shared rules: [contracts/](contracts).
@@ -43,8 +44,12 @@ Agents (optional helpers in [agents/](agents), picked by `delegate`): `task-revi
 
 ```
 /plugin marketplace add anmarkoulis/skills
-/plugin install factory@anmarkoulis-skills
+/plugin install anmarkoulis@anmarkoulis-skills
 ```
+
+Skills are invoked as `/anmarkoulis:<skill>`, for example `/anmarkoulis:ship #42`. Installed the earlier
+`factory@anmarkoulis-skills`? Uninstall it and install `anmarkoulis@anmarkoulis-skills`; the old id no longer
+receives updates.
 
 ## How it is meant to be used
 
@@ -52,7 +57,7 @@ The plugin is generic: nothing in it knows about your tracker, your test command
 You add those in layers you own:
 
 ```
-factory (this repo)        generic steps, contracts, tier engine
+factory (skills/factory/)  generic steps, contracts, tier engine
   └─ company (optional)    what a company's repos share (acme-*)
        └─ project          one repo's specifics: test suites, agents (myproj-*)
 ```
