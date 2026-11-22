@@ -44,7 +44,7 @@ steps it owns (`simplify`).
 |---|---|---|---|
 | 1 | intake | `factory:intake` | task folder, `context.md`, `ticket.md`, `decisions.md` |
 | 2 | tier | `factory:tier` | `tier.md` |
-| 3 | understand | `factory:understand` (bug → root cause, feature → spec); may re-tier; fallback below | `combined.md` or `spec.md` |
+| 3 | understand | `factory:understand` (bug → root cause, feature → spec); may re-tier | `combined.md` or `spec.md` |
 | 4 | plan | `factory:plan` | `plan.md` |
 | 5 | build | `factory:build` | `impl/` |
 | 6 | simplify | `simplify` plus the case inventory (below); from T1 | `simplify/` |
@@ -55,10 +55,6 @@ steps it owns (`simplify`).
 
 - A step whose skill is not installed is logged `<step> skipped <date> - <skill> not available` and the run
   continues; the next step works from what exists. Never improvise a missing step's procedure.
-- **understand fallback** until `factory:understand` exists: for a bug, `superpowers:systematic-debugging`,
-  with its verdict written to `combined.md`; for a feature or improvement, `superpowers:brainstorming`, writing
-  `spec.md`. Log `ship done <date> status.md fallback: understand → <skill>`. Only when neither is installed, log
-  `understand skipped <date> - not available`.
 - **Re-tier** after understand when the root cause or the spec changes the size or risk: run `factory:tier`
   again before plan.
 - **Simplify**: before touching anything, list the test cases that cover the changed code
@@ -80,20 +76,22 @@ showing `decisions.md` and `tier.md` together.
 
 ## Resume
 
-Read `ft last <folder>`, key on its step and state, and say which line you resumed from. If the file the line
-names is missing, re-run that step instead of showing it.
+Read `ft last <folder>`, key on its step and state (the first matching row wins), and say which line you
+resumed from. If the file the line names is missing, re-run that step instead of showing it.
 
 | Last line | Continue at |
 |---|---|
 | none | intake |
+| `ship …` | apply this table to the last non-`ship` line |
+| `debugging …` or `spec …` | re-run understand (it reuses the files that exist) |
+| `qa-tests …` or `manual-test …` | re-run verify (it reuses the files that exist) |
 | `<step> stopped … awaiting answer` | that stop: show the file, ask again |
 | `<step> stopped` with any other reason | show the reason, ask, then re-run that step |
 | `<step> changed` | re-run that step, then its stop |
 | `<review\|verify\|finalize> loop` | build, round N+1 |
 | `build done` | simplify (first round) or review (later rounds) |
-| `<step> done` or `<step> skipped` | the next step in the pipeline |
-| `ship …` | the step after the last non-`ship` line |
 | `retro done` | finished; nothing to resume |
+| `<step> done` or `<step> skipped` | the next step in the pipeline |
 
 Work already committed before intake: after intake, log understand, plan and build as `skipped` with the
 commit sha as the reason, then continue at review.
