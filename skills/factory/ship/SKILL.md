@@ -66,6 +66,8 @@ steps it owns (`simplify`).
   built-in Claude Code skill; without it, do the same pass inline.
 - **Review comes before verify.** A failed review or verify loops to build, and the whole review → verify path
   runs again. **Verify after every build round**, and again if any production line changed after a run.
+- **Loop cap.** Before any loop goes to build, check the cap and the repeated finding, and stop when either
+  trips ([loop cap](../../../contracts/README.md#loop-cap)). The stop runs at every tier.
 - **Retro runs even when the work stopped early.**
 
 ## Stops
@@ -85,13 +87,15 @@ resumed from. If the file the line names is missing, re-run that step instead of
 | Last line | Continue at |
 |---|---|
 | none | intake |
+| `ship stopped … loop cap <N> reached` or `… repeat finding …` | the loop cap stop: show the rounds, ask again |
+| `ship stopped … loop cap <N>: stopped by user` | retro |
 | `ship …` | apply this table to the last non-`ship` line |
 | `debugging …` or `spec …` | re-run understand (it reuses the files that exist) |
 | `qa-tests …` or `manual-test …` | re-run verify (it reuses the files that exist) |
 | `<step> stopped … awaiting answer` | that stop: show the file, ask again |
 | `<step> stopped` with any other reason | show the reason, ask, then re-run that step |
 | `<step> changed` | re-run that step, then its stop |
-| `<review\|verify\|finalize> loop` | build, round N+1 |
+| `<review\|verify\|finalize> loop` | the loop cap check, then build, round N+1 |
 | `build done` | simplify (first round) or review (later rounds) |
 | `retro done` | finished; nothing to resume |
 | `<step> done` or `<step> skipped` | the next step in the pipeline |
@@ -117,4 +121,5 @@ resumes this task folder at the next step. Repeat after each further 10%.
 | Point | Default | Allowed |
 |---|---|---|
 | stops per tier | the table in [stops.md](stops.md) | `set`: add or remove stops per tier; a removal carries a reason, logged as `ship … loosened:` |
+| max build rounds | T0 2, T1 3, T2 3 | `set`: a number per tier |
 | task folder search | `.factory/*/status.md` | follows `intake`'s task folder location; not set here |

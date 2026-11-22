@@ -45,6 +45,7 @@ reason, the reason a `skipped` needs and the `→build` a `loop` starts with; th
 ```
 bash <this folder>/factory-task log <folder> <step> <state> <file> [<reason>]
 bash <this folder>/factory-task last <folder>
+bash <this folder>/factory-task rounds <folder>
 ```
 
 - The **last line** decides where a run resumes. Never infer progress from which files exist.
@@ -54,6 +55,27 @@ bash <this folder>/factory-task last <folder>
   `build done` lines plus 1.
 - Facts that are not step events use step `ship`: `ship done <date> status.md layers: acme, shop (from AGENTS.md)`,
   `ship done <date> status.md fallback: <what> → <what>`, `ship done <date> status.md loosened: <rule> because <reason>`.
+
+### Loop cap
+
+A loop never starts build unchecked ([ADR 10](../docs/decisions/0010-loop-cap.md)).
+
+- **Rounds** are the `build done` lines since the last `plan done`: `factory-task rounds <folder>`. A new plan
+  starts a fresh count.
+- **The cap** is the N of the last `ship done <date> status.md loop cap raised to <N>` since the last
+  `plan done`, else `ship`'s **max build rounds**.
+- **At the cap.** When a `<review|verify|finalize> loop` is the last line and rounds ≥ cap, `ship` does not run
+  build. It logs `ship stopped <date> status.md loop cap <N> reached`.
+- **Repeated finding.** Before acting on a loop, `ship` compares its file's findings (`file:line` and reason)
+  with the previous loop's file. When a finding that a round claimed to fix is back, it logs
+  `ship stopped <date> status.md repeat finding <file:line>`, whatever the count.
+- **The stop** shows one line per round: what that round's `build done` reason fixed, and what the next loop
+  sent back, with repeats marked. Then it asks one question:
+  - **one more round**: log `ship done <date> status.md loop cap raised to <N+1>`, N being the current cap,
+    then build. A raise logged after a loop line settles both checks for that loop;
+  - **back to plan**: the plan is wrong; re-run `plan` (its `plan done` resets the count);
+  - **back to understand**: the problem is misunderstood; re-run `understand`, then `plan`;
+  - **stop here**: log `ship stopped <date> status.md loop cap <N>: stopped by user`, then run `retro`.
 
 ## Stops
 
