@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Use when taking a ticket or a described piece of work from start to an open PR and a retro ("ship #42", "fix this bug end to end", "build X the full way"), or when resuming a half-done factory task folder. Not for one-line tweaks the user wants done directly.
+description: 'Use when taking a ticket or a described piece of work from start to an open PR and a retro ("ship #42", "fix this bug end to end", "build X the full way"), or when resuming a half-done factory task folder. Not for one-line tweaks the user wants done directly.'
 ---
 
 # ship
