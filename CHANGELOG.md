@@ -1,3 +1,9 @@
+## [0.2.0](https://github.com/anmarkoulis/skills/compare/v0.1.0...v0.2.0) (2026-11-22)
+
+### Features
+
+* rename the plugin to anmarkoulis and group skills by folder ([#31](https://github.com/anmarkoulis/skills/issues/31)) ([92fc856](https://github.com/anmarkoulis/skills/commit/92fc856f94a45c7353d8b467f4f4fb8816c924b4)), closes [#29](https://github.com/anmarkoulis/skills/issues/29)
+
 ## [0.1.0](https://github.com/anmarkoulis/skills/compare/v0.0.1...v0.1.0) (2026-11-22)
 
 ### Features
