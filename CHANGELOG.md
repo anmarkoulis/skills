@@ -1,3 +1,9 @@
+## [0.2.1](https://github.com/anmarkoulis/skills/compare/v0.2.0...v0.2.1) (2026-11-22)
+
+### Bug Fixes
+
+* quote the ship skill description ([#41](https://github.com/anmarkoulis/skills/issues/41)) ([583db1f](https://github.com/anmarkoulis/skills/commit/583db1ffe59d8d102ffc90292c1e154562b9640b))
+
 ## [0.2.0](https://github.com/anmarkoulis/skills/compare/v0.1.0...v0.2.0) (2026-11-22)
 
 ### Features
