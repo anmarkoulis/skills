@@ -35,6 +35,7 @@
     "./skills/factory/tracker",
     "./skills/factory/understand",
     "./skills/factory/verify",
+    "./skills/generic/code-schematic",
     "./skills/generic/explain"
   ]
 }
