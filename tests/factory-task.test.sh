@@ -46,4 +46,17 @@ no bash "$ft" log "$d" plan done 2026-11-22
 printf '\n  \n' >> "$d/status.md"
 [ "$(bash "$ft" last "$d")" = "build done $(date +%F) impl/status.md round 2 ← review: missing null check" ] || fail "last: $(bash "$ft" last "$d")"
 [ "$(grep -c '[^[:space:]]' "$d/status.md")" -eq 3 ] || fail "rejected lines were written"
+r=$(bash "$ft" -C "$tmp" path rounds)
+[ "$(bash "$ft" rounds "$r")" = 0 ] || fail "rounds on empty"
+ok bash "$ft" log "$r" build done impl/status.md
+ok bash "$ft" log "$r" build done impl/status.md round 2 ← review: x
+[ "$(bash "$ft" rounds "$r")" = 2 ] || fail "rounds: $(bash "$ft" rounds "$r")"
+ok bash "$ft" log "$r" plan done plan.md
+[ "$(bash "$ft" rounds "$r")" = 0 ] || fail "rounds not reset by plan done"
+ok bash "$ft" log "$r" build done impl/status.md round 3 ← verify: y
+ok bash "$ft" log "$r" verify loop verify.md "→build y"
+ok bash "$ft" log "$r" ship stopped status.md loop cap 1 reached
+ok bash "$ft" log "$r" ship stopped status.md repeat finding a.sh:3
+[ "$(bash "$ft" rounds "$r")" = 1 ] || fail "rounds after reset: $(bash "$ft" rounds "$r")"
+no bash "$ft" rounds "$tmp/nowhere"
 echo "factory-task: all checks passed"

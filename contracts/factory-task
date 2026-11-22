@@ -11,6 +11,9 @@
 #       Append one status.md line: <step> <state> <YYYY-MM-DD> <file> [<reason>].
 #   factory-task last FOLDER
 #       Print the last status.md line (empty when there is none). Resume keys on it.
+#   factory-task rounds FOLDER
+#       Print the number of `build done` lines since the last `plan done` (0 when none).
+#       ship compares it with the loop cap.
 #
 # -C DIR runs as if started in DIR, like git -C, so a caller can target a worktree.
 # Pattern from superpowers' sdd-workspace.
@@ -64,5 +67,10 @@ case "$cmd" in
     [ -f "$1/status.md" ] || die "no status.md in $1"
     grep -v '^[[:space:]]*$' "$1/status.md" | tail -n 1 || true
     ;;
-  *) die "usage: factory-task [-C DIR] path SLUG [BASE] | log FOLDER STEP STATE FILE [REASON...] | last FOLDER" ;;
+  rounds)
+    [ $# -eq 1 ] || die "usage: factory-task rounds FOLDER"
+    [ -f "$1/status.md" ] || die "no status.md in $1"
+    awk '/^plan done /{n=0} /^build done /{n++} END{print n+0}' "$1/status.md"
+    ;;
+  *) die "usage: factory-task [-C DIR] path SLUG [BASE] | log FOLDER STEP STATE FILE [REASON...] | last FOLDER | rounds FOLDER" ;;
 esac
