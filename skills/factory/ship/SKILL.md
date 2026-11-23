@@ -72,8 +72,8 @@ steps it owns (`simplify`).
 
 ## Stops
 
-The tier decides which stops are active ([stops.md](stops.md)). At an active stop, follow the stop contract:
-print the path, a 3–5 line summary, ask **continue / change / stop here**. At an inactive stop, log
+The tier decides which stops are active ([stops.md](stops.md)). At an active stop, follow the [stop contract](../../../contracts/README.md#stops):
+show the file, ask **continue / change / stop here**. At an inactive stop, log
 `<step> done` and continue, but still show the summary in one line. Asks inside a step are never skipped.
 
 The tier is not known when intake ends, so run `tier` first and then apply the intake stop for that tier,

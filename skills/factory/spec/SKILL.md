@@ -67,7 +67,8 @@ or an owner with `deferred` as the answer (the user approves each), then update 
 
 ## 6. Approve and post
 
-Show `spec.md` and ask for approval once every row is answered. On a change, update the spec, log
+Once every row is answered, show `spec.md` and ask for approval, as a
+[stop](../../../contracts/README.md#stops) shows a file. On a change, update the spec, log
 `ft log <folder> spec changed spec.md <reason>` and go back to step 5. Once approved, `anmarkoulis:tracker`
 `post spec spec.md` and record where it went in `decisions.md`. Log `spec done <date> spec.md`.
 
