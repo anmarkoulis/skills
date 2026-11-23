@@ -55,14 +55,35 @@ Usable on their own, outside the factory (`skills/generic/`).
 
 ## Install
 
+From a Claude Code session:
+
 ```
 /plugin marketplace add anmarkoulis/skills
 /plugin install anmarkoulis@anmarkoulis-skills
 ```
 
-Skills are invoked as `/anmarkoulis:<skill>`, for example `/anmarkoulis:ship #42`. Installed the earlier
-`factory@anmarkoulis-skills`? Uninstall it and install `anmarkoulis@anmarkoulis-skills`; the old id no longer
-receives updates.
+Or from a shell:
+
+```
+claude plugin marketplace add anmarkoulis/skills
+claude plugin install anmarkoulis@anmarkoulis-skills
+```
+
+Restart Claude Code, then run `/plugin` to check that `anmarkoulis` is installed and enabled. Skills are
+invoked as `/anmarkoulis:<skill>`, for example `/anmarkoulis:ship #42`, and also trigger from their
+descriptions.
+
+To update, refresh the marketplace and update the plugin, then restart:
+
+```
+claude plugin marketplace update anmarkoulis-skills
+claude plugin update anmarkoulis@anmarkoulis-skills
+```
+
+To try a local checkout without installing, start Claude Code with `claude --plugin-dir /path/to/skills`.
+
+Installed the earlier `factory@anmarkoulis-skills`? Uninstall it and install `anmarkoulis@anmarkoulis-skills`;
+the old id no longer receives updates.
 
 ## How it is meant to be used
 
@@ -84,6 +105,10 @@ A repo declares zero or more layers, lowest first, in its `AGENTS.md`. Each laye
 None required. If [superpowers](https://github.com/obra/superpowers) or
 [mattpocock/skills](https://github.com/mattpocock/skills) are installed, steps use them for more depth;
 without them, each step follows its own built-in procedure.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Contributors are listed in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## License
 
