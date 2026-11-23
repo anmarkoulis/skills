@@ -51,7 +51,7 @@ report folder and the tier (`anmarkoulis:review` passes `<task folder>/review/` 
 ## 3. Walkthrough
 
 1. **Map the flow** with `anmarkoulis:code-schematic`, twice, on the runtime path the change sits on: `ref=<base>
-   label=Before` → `schematic-before.md`, then `ref=<head> label=After diff=<base>..<head>` →
+   label=Before diff=<base>..<head>` → `schematic-before.md`, then `ref=<head> label=After diff=<base>..<head>` →
    `schematic-after.md`, run after the first and given it. For a local diff, base is `HEAD` and head is
    `WORKTREE`. Without the skill, draw one Mermaid flowchart of the after state with `file:line` on each node.
 2. **Per changed file**, in dependency order (data → logic → interface → tests → migrations): what it did
