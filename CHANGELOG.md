@@ -1,3 +1,9 @@
+## [0.6.3](https://github.com/anmarkoulis/skills/compare/v0.6.2...v0.6.3) (2026-11-23)
+
+### Bug Fixes
+
+* restore rules dropped from code-schematic and explain ([#61](https://github.com/anmarkoulis/skills/issues/61)) ([4187df4](https://github.com/anmarkoulis/skills/commit/4187df4c35ec5bdd56c05824e23594d09e336b01))
+
 ## [0.6.2](https://github.com/anmarkoulis/skills/compare/v0.6.1...v0.6.2) (2026-11-23)
 
 ### Bug Fixes
