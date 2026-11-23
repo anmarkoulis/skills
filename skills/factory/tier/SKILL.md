@@ -9,6 +9,8 @@ Proposes one risk tier with one line of reasoning and writes `tier.md`. The tier
 (`ship`'s stops table), how deep each step goes (below) and where a person must approve. Contracts:
 [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## 1. Read the signals
 
 From `ticket.md`, `context.md`, `decisions.md` (and on a re-tier `combined.md` or `spec.md`):

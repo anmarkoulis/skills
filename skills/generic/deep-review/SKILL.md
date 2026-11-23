@@ -10,6 +10,8 @@ skill gives them the context, re-checks what they say, and writes it up. Output 
 `review.md` (the reasoning, for the reviewer) and `comments.md` (draft comments, for the author). Shapes:
 [formats.md](formats.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## Hard rule: nothing is posted
 
 Forbidden unless the user asks **and** confirms the exact text: any write to the PR, its issue or the tracker.

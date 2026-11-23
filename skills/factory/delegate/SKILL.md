@@ -10,6 +10,8 @@ caller's context. Contracts (task folder, `status.md`, verdicts): [../../../cont
 `ft` means `bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's
 base directory. Decision: [ADR 5](../../../docs/decisions/0005-agents-and-worker-levels.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 **Inputs from the caller:** the role (`implementer`, `reviewer`, `diagnoser`, `qa-runner`, `manual-tester`),
 the brief, the result file path inside the caller's task folder, and the plan task's agent if it names one.
 

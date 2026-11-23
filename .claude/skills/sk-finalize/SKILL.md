@@ -1,6 +1,6 @@
 ---
 name: sk-finalize
-description: Extends anmarkoulis:finalize for the anmarkoulis/skills repo with its post-merge cleanup. Not for direct use; anmarkoulis:ship applies it through the sk layer.
+description: Extends anmarkoulis:finalize for the anmarkoulis/skills repo with its post-merge cleanup. Not for direct use; the core skill applies it through the sk layer.
 ---
 | Point | This layer |
 |---|---|

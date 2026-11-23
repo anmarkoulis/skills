@@ -9,6 +9,8 @@ Prove the change works and say what is not proven. Writes `verify.md`, `gaps.md`
 Never reports a pass without the command and its output. Never edits production code: a failure goes back to
 build. Contracts and evidence rules: [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## 1. Regression map, always first
 
 At the top of `verify.md`, record the tree under test (HEAD sha) and the base sha from `decisions.md`; every diff

@@ -8,6 +8,8 @@ description: Use as the last step of anmarkoulis:ship, also when the work stoppe
 Turns a task folder into `retro.md` and `skill-fixes.md`, and into edits only with approval. It never edits a
 skill, agent or check on its own. Contracts: [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 Depth by tier: T0 only when something caused friction (otherwise log `retro skipped <date> - T0, no friction`);
 T1 short; T2 full, with checks proposed.
 

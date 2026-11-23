@@ -11,9 +11,11 @@ rules: [../../../contracts/README.md](../../../contracts/README.md). `ft` means
 `bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's base
 directory.
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 **Inputs:** the task folder, the touched area (from the regression map in `verify.md`), the suite location if
 known. The run is one worker, picked with `anmarkoulis:delegate`, role `qa-runner`; the brief is these inputs, this
-skill's path and the overrides it was handed. A worker given this skill does the steps below itself.
+skill's path and the overrides it resolved. A worker given this skill does the steps below itself.
 
 ## 1. Find the suite
 

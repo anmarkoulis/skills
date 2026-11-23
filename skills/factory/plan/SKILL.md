@@ -9,6 +9,8 @@ Thin by design: it turns what intake and understand settled into an ordered task
 task folder. The plan is temporary and never committed; decisions live in `decisions.md` and the ticket.
 Contracts: [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 **Inputs:** `ticket.md`, `decisions.md`, `tier.md`, and `combined.md` or `spec.md` if present.
 
 ## 1. Write the plan

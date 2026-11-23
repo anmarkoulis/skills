@@ -1,6 +1,6 @@
 ---
 name: sk-intake
-description: Extends anmarkoulis:intake for the anmarkoulis/skills repo with its worktree layout and an ADR scope question. Not for direct use; anmarkoulis:ship applies it through the sk layer.
+description: Extends anmarkoulis:intake for the anmarkoulis/skills repo with its worktree layout and an ADR scope question. Not for direct use; the core skill applies it through the sk layer.
 ---
 | Point | This layer |
 |---|---|

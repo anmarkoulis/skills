@@ -10,6 +10,8 @@ layer may `replace` the mechanics (for another tracker) but not the names or out
 user's explicit yes, every time; `read` never writes. The caller passes the task folder and logs its own
 `status.md` line.
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## `read <id>`
 
 Writes `ticket.md` and `raw/`.

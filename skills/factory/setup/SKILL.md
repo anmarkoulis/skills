@@ -7,8 +7,8 @@ description: Use once per repo, before the first anmarkoulis:ship run or when it
 
 Declares a repo's layers and scaffolds their variant skills. Writes the `factory layers:` line and
 `.claude/skills/<prefix>-<step>/SKILL.md` files (Claude Code's project skill folder; another harness: its own); nothing else, and nothing without a yes. Layers, variants and
-the Overrides table: [../../../contracts/README.md](../../../contracts/README.md). The core skills are this skill's
-siblings, one directory up.
+the Overrides table: [../../../contracts/README.md](../../../contracts/README.md). The skills it scaffolds for are
+every `SKILL.md` two directories up (`skills/*/*/`) whose Override points table has a point.
 
 ## 1. Layers
 
@@ -34,15 +34,15 @@ For each layer, ask which steps it varies. For each chosen step:
    ```markdown
    ---
    name: <prefix>-<step>
-   description: Extends anmarkoulis:<step> for <repo or company> with <what this layer changes>. Not for direct use; anmarkoulis:ship applies it.
+   description: Extends anmarkoulis:<step> for <repo or company> with <what this layer changes>. Not for direct use; the core skill applies it.
    ---
    | Point | This layer |
    |---|---|
    | <every point from the core table> | default |
    ```
 
-   Do this for the helper steps the user names too (`tracker`, `delegate`, `debugging`, `spec`, `qa-tests`,
-   `manual-test`); their variants apply wherever another step calls them. A `replace` row gets a section below
+   Any skill with override points can get a variant, `tracker`, `delegate` and `deep-review` included; it
+   applies wherever that skill runs, in `ship` or on its own. A `replace` row gets a section below
    the table holding the mechanics ([variant skills](../../../contracts/README.md#variant-skills)).
 
 3. A core skill whose table says none gets no variant; say so.

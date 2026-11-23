@@ -102,13 +102,12 @@ scaffolds the variants. The rules are in [contracts/README.md](contracts/README.
   `~/.claude/skills/`, or a plugin. A company layer can live once at user level.
 - **What a variant holds.** An Overrides table answering the core step's Override points, and sections below it
   that a cell points to. A `replace` always needs such a section. Its description ends with
-  "Not for direct use; anmarkoulis:ship applies it." so it does not trigger on its own.
+  "Not for direct use; the core skill applies it." so it does not trigger on its own.
 - **Several layers.** `set` and `replace`: the highest layer wins. `extend`: every layer's additions run, lowest
   first.
-- **Helper steps** (`tracker`, `delegate`, `debugging`, `spec`, `qa-tests`, `manual-test`) take variants too, and
-  they apply wherever another step calls them: an `acme-tracker` that replaces the mechanics with another tracker
-  is what intake, plan and finalize use.
-- **Only `ship` applies layers.** A step run on its own says "layers skipped" and uses the core defaults.
+- **Every skill with override points applies its own layers**, in `ship`, when another skill calls it, and run
+  on its own ([ADR 12](docs/decisions/0012-layers-wherever-a-table-exists.md)): an `acme-tracker` that replaces
+  the mechanics with another tracker is what intake, plan, finalize and a standalone `deep-review` use.
 
 ### Moving from your own end-to-end skill
 

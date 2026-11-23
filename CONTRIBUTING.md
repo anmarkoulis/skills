@@ -32,6 +32,7 @@ CI runs the same checks:
 ```
 bash tests/factory-task.test.sh     # on bash 3.2 (macOS /bin/bash) and bash 5
 bash tests/frontmatter.test.sh
+bash tests/layers.test.sh
 shellcheck contracts/factory-task tests/*.sh
 claude plugin validate . --strict   # after touching .claude-plugin/
 ```
