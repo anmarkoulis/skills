@@ -7,19 +7,22 @@ description: Use as level L3 of anmarkoulis:verify, or when a user-facing, secur
 
 Drives the running app through the cases the change must satisfy and records what was seen. Writes
 `verify/manual.md`, plus one script per flow and one screenshot per case in `verify/manual/`, in the task folder;
-never edits repo files. Contracts and evidence rules: [../../../contracts/README.md](../../../contracts/README.md).
-`ft` means `bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's
-base directory.
+never edits repo files, except a bug's base vs fix swap (section 3a), which it restores. Contracts and evidence
+rules: [../../../contracts/README.md](../../../contracts/README.md). `ft` means
+`bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's base
+directory.
 
-**Inputs:** the task folder (`plan.md`, `spec.md` if present, the regression map in `verify.md`). The run is one
-worker, picked with `anmarkoulis:delegate`, role `manual-tester`; the brief is the case list (step 1), how to reach
-the app (step 2), the task folder and this skill's path. A worker given this skill does the steps below itself.
+**Inputs:** the task folder (`ticket.md` for the type, `plan.md`, `spec.md` if present, the regression map in
+`verify.md`, the base sha in `decisions.md`). The run is one worker, picked with `anmarkoulis:delegate`, role
+`manual-tester`; the brief is the case list (step 1), how to reach the app (step 2), the task folder and this
+skill's path. A worker given this skill does the steps below itself.
 
 ## 1. Cases
 
 From the plan, the spec and the regression map, one row per case: id | what to do | expected. Include the
-failing path the change fixes, the happy path, and one neighbouring flow from the map that shares code. Show the
-list to the user unless it was given.
+failing path the change fixes, the happy path, and one neighbouring flow from the map that shares code. A case is
+a browser flow or a replayed request (a saved `curl` command or a captured HTTP request, such as a pentest
+finding's). Show the list to the user unless it was given.
 
 ## 2. Reach the app
 
@@ -48,9 +51,27 @@ whole of `manual.md` (for example "library with no service"). Never leave it emp
   dialog or an element, not a 200.
 - Note every state you changed, and undo it.
 
+## 3a. Base vs fix, for a bug
+
+When `ticket.md` says bug, run every case twice: A on the base, B on the fix. The base must show the bug and the
+fix must not. Features and improvements run once, as above.
+
+- **Swap** with verify's **A/B mechanism** (default: save the production diff against the base sha from
+  `decisions.md` as a patch under `verify/manual/`, check out those files at that sha, run A, re-apply the patch,
+  confirm with `git diff --stat`). Never stash. A file the fix adds is untracked, so the patch does not carry it:
+  move it to `verify/manual/added/` for A and back for B. After each swap, restart
+  whatever does not reload on its own (a worker, a build step, a server without hot reload) and wait until the
+  app answers.
+- **Same script, unchanged for A and B.** It resets its own state before each run. Save each side as
+  `verify/manual/<case>-base.*` and `<case>-fix.*`.
+- **Base does not show the bug:** the case is wrong, not the verdict. Fix the case once and rerun A. Still no
+  bug: mark the case **not reproduced** and return `manual` with that reason; the fix is unproven at L3.
+- End on the fix: the patch re-applied and `git diff --stat` matching the one before the swap.
+
 ## 4. Record `verify/manual.md`
 
-Table **case | expected | seen | screenshot**, with timings or status codes where they matter. Then: cases not
+Table **case | expected | seen | screenshot**, with timings or status codes where they matter. For a bug, the table
+is **case | expected on base | seen on base | expected on fix | seen on fix | evidence** instead. Then: cases not
 run and why, state changed and restored, gaps (a touched flow with no case), and the verdict (the contract's: `success`, `flawed`,
 `success` with `not applicable: <reason>`, or `manual` when a person must look) with its evidence. A pass needs the screenshot or transcript and the observation behind it.
 
