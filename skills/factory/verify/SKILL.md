@@ -29,7 +29,9 @@ consumers. Run each required level; skip one only with a written reason, shown a
   `not applicable`, copy the reason into `gaps.md` as `L2 not applicable: <reason>`.
 - **L3, manual:** the **L3 procedure** (default `anmarkoulis:manual-test`); a `not applicable` goes to `gaps.md`
   as `L3 not applicable: <reason>`. Required for security, outbound-call and
-  user-facing changes.
+  user-facing changes. For a bug, manual-test runs each case on the base and on the fix; a case the base does not
+  reproduce goes to `gaps.md` as `L3 unproven: base did not reproduce <case>`, and the verdict is `manual`, never
+  a pass.
 - **L4, after deploy:** staging or production retests and monitoring. List them as follow-ups; never run them
   unasked.
 - **A/B (T2):** run the new tests on the base without the production change and show they fail, using the **A/B
