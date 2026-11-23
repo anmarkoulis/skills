@@ -1,3 +1,9 @@
+## [0.9.0](https://github.com/anmarkoulis/skills/compare/v0.8.1...v0.9.0) (2026-11-23)
+
+### Features
+
+* apply layers to helper steps and add a personal layer ([#69](https://github.com/anmarkoulis/skills/issues/69)) ([8efddcb](https://github.com/anmarkoulis/skills/commit/8efddcb40bf0f5a9e1138e2b345a85fc6cb1a52c))
+
 ## [0.8.1](https://github.com/anmarkoulis/skills/compare/v0.8.0...v0.8.1) (2026-11-23)
 
 ### Bug Fixes
