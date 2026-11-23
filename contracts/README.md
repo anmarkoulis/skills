@@ -88,7 +88,8 @@ here**. Before asking, log `<step> stopped <date> <file> awaiting answer`.
 - **stop here**: log `<step> stopped <date> <file>` and end.
 
 Which stops are active is decided by the tier (`ship`'s stop table). Asks inside a step (which ticket, worktree
-or inline, execution method, every tracker write, commit and push) are not stops and are never skipped.
+or inline, execution method unless this round's plan stop already got it, every tracker write, commit and push)
+are not stops and are never skipped.
 
 ## Results
 

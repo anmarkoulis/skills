@@ -23,6 +23,7 @@ Plugin agents go in `agents/` at the root. Skills for working on this repo itsel
 ## Checking a change
 
 - Scripts run on bash 3.2 (macOS `/bin/bash`) as well as bash 5: `bash tests/factory-task.test.sh`, and
-  `shellcheck` on `contracts/factory-task` and `tests/*.sh`. CI runs both.
+  `shellcheck` on `contracts/factory-task` and `tests/*.sh`. CI runs both. Without a local shellcheck:
+  `docker run --rm -v "$PWD:/mnt" -w /mnt koalaman/shellcheck:stable contracts/factory-task tests/*.sh`.
 - `claude plugin validate .` after touching `.claude-plugin/`.
 - A skill is done only once it has been tried in a session started with `claude --plugin-dir .`.

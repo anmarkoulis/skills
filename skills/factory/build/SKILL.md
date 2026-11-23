@@ -13,7 +13,8 @@ loop line's reason. Read the whole plan before asking anything.
 
 ## 1. Ask the execution method, every time
 
-One question; never reuse an earlier ticket's or round's answer. On a loop round, offer one more option: the same
+One question; never reuse an earlier ticket's or round's answer. If this round's
+plan stop already got the method, use that answer and say so. On a loop round, offer one more option: the same
 method for the remaining rounds of this run; when chosen, record it in `impl/status.md` and do not ask again in
 this run. Mark one option recommended with a one-line
 reason (the tier's recommendation, then the plan's size):
