@@ -8,6 +8,8 @@ description: Use as the review step of anmarkoulis:ship, after build and simplif
 Thin by design: it picks the reviewer and the depth, and owns the loop. The review itself is done by a review
 skill. Writes `review.md` in the task folder. Contracts: [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## 1. Depth by tier
 
 | Tier | Review | Independent? |

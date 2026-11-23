@@ -8,6 +8,8 @@ description: Use as the finalize step of anmarkoulis:ship, after verify passes, 
 Turns a verified working tree into a PR. Writes `pr-body.md` and records the PR url. Every commit, push, PR,
 ticket write and merge needs the user's yes, every time. Contracts: [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## 1. Check before asking
 
 - `verify.md`'s last run passed and no production line changed after it. Otherwise go back to verify.

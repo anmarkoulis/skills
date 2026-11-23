@@ -19,7 +19,8 @@ tool.
   declared outside the repo ([ADR 11](0011-personal-layer.md)).
 - A layer's skills are named `<prefix>-<step>` and say in their description which skill they extend.
 - For step `<step>` the factory loads the core skill, then each declared layer's `<prefix>-<step>` in order, if
-  it exists. A variant whose prefix the repo does not declare is never used.
+  it exists. A variant whose prefix the repo does not declare is never used. Each skill loads its own variants
+  ([ADR 12](0012-layers-wherever-a-table-exists.md)).
 - Same-name shadowing is never used.
 - Typical setups: a personal project declares just its own project layer (core → project). A company repo may
   declare a company layer and then the project layer (core → company → project). The company layer is an

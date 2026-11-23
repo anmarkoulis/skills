@@ -10,6 +10,8 @@ branches, no commits, no tracker writes. Contracts (task folder, `status.md`, ve
 [../../../contracts/README.md](../../../contracts/README.md). `ft` means `bash <plugin root>/contracts/factory-task`;
 the plugin root is three directories above this skill's base directory.
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 **Inputs:** the task folder (with `ticket.md` and `raw/` from intake), the tier, and any correction the user
 gave. Run on its own, start with `anmarkoulis:intake` so the task folder exists.
 

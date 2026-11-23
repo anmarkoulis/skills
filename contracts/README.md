@@ -126,27 +126,27 @@ the first `factory personal layers: <prefix>` line in `CLAUDE.local.md` at the r
 `~/.claude/CLAUDE.md`. Personal layers always come after the repo's; a prefix the repo already declares is not
 added twice.
 
-`ship` reads both lines itself (it does not rely on the harness loading these files) and logs where each came
-from: `ship done <date> status.md layers: acme, shop, me (from AGENTS.md; me from ~/.claude/CLAUDE.md)`. No line
-means core only. A variant whose prefix is not declared is never used. A missing variant means the core default
-applies; `ship` logs a resolution table at the start of every run (`ship done <date> status.md resolution: …`) so
-it is visible.
+The lines are read from the files, never from what the harness happened to load. No line means core only. A
+variant whose prefix is not declared is never used; a missing variant means the core default applies.
 
-### Steps and helper steps
+### Resolving layers
 
-The pipeline steps are the ones `ship` runs. The **helper steps** (`tracker`, `delegate`, `debugging`, `spec`,
-`qa-tests`, `manual-test`) are called from inside other steps, and their variants apply there too:
+Every skill whose **Override points** table has a point resolves its own layers before its first step, inside
+`ship`, called by another skill, or run on its own ([ADR 12](../docs/decisions/0012-layers-wherever-a-table-exists.md)):
 
-- `ship` collects the overrides of each pipeline step before running it, and of every helper step once per
-  session, and hands a step its own overrides plus the helper steps'.
-- A step that calls another step passes that step's overrides along with the call, and a nested call does the
-  same (verify → qa-tests → delegate).
-- A step run on its own, outside `ship`, gets no overrides. It says so in one line ("run outside ship: layers
-  skipped, core defaults apply") and uses the core defaults.
+1. **The list.** Use the `layers:` line the caller handed over (a handed `layers: none` counts). None handed:
+   read the two lines above yourself. No line found: say "layers: none" in one line and skip to the skill's first
+   step. A skill this session already resolved for the same list reuses that result.
+2. **The variants.** For each prefix, lowest first, invoke `<prefix>-<skill>` if it exists, and collect its
+   Overrides table and the sections its cells point to. Merge them by the rule below.
+3. **Pass it on.** When you call another skill, hand it the `layers:` line; it resolves its own variants. A
+   worker never resolves: put the overrides its work depends on in its brief.
+4. **Say what applied.** Inside `ship`, its `resolution:` line covers it. Otherwise say it in one line of the
+   skill's own output: `layers: <list>; applied: <variants or none>`.
 
 ### Merging
 
-For one step, `ship` collects the Overrides table of each declared layer's `<prefix>-<step>` skill, lowest first:
+For one skill, the Overrides tables of each declared layer's `<prefix>-<skill>`, lowest first, combine as:
 
 | Allowed | Several layers answer |
 |---|---|
@@ -158,12 +158,12 @@ A row left at `default` is no answer: a lower layer's value stands.
 
 ### Variant skills
 
-A variant `<prefix>-<step>` is config, not a wrapper: it never calls the core step, `ship` does.
+A variant `<prefix>-<skill>` is config, not a wrapper: it never calls the core skill; the core skill reads it.
 
 - **Where:** any skill folder the session loads: the project's `.claude/skills/`, the user's `~/.claude/skills/`,
   or a plugin. Resolution is by name, so a company layer can live once at user level and serve every repo.
 - **Description:** says which skill it extends and that it is not for direct use, so it does not trigger on its
-  own: `Extends anmarkoulis:verify for the shop repo with … Not for direct use; anmarkoulis:ship applies it.`
+  own: `Extends anmarkoulis:verify for the shop repo with … Not for direct use; the core skill applies it.`
 - **Body:** the Overrides table, then optional sections below it. A cell may point to a section by its heading
   (`replace: see "Jira mechanics"`), and the section is read as part of the value. A `replace` always needs one:
   a cell cannot hold mechanics.
@@ -182,7 +182,7 @@ A variant skill answers with an **Overrides** table, `point | this layer` ([vari
 ```markdown
 ---
 name: shop-verify
-description: Extends anmarkoulis:verify for the shop repo with its test commands and staging quirks. Not for direct use; anmarkoulis:ship applies it.
+description: Extends anmarkoulis:verify for the shop repo with its test commands and staging quirks. Not for direct use; the core skill applies it.
 ---
 | Point | This layer |
 |---|---|

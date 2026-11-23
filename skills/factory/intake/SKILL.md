@@ -10,6 +10,8 @@ Contracts (task folder, `status.md`, stops): [../../../contracts/README.md](../.
 `bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's base
 directory.
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 ## 1. Which ticket
 
 Ask both questions, every time, even when the prompt names an id. Never assume either answer:

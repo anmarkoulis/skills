@@ -10,6 +10,8 @@ Routes by ticket type and writes nothing of its own beyond `decisions.md` lines:
 [../../../contracts/README.md](../../../contracts/README.md). `ft` means `bash <plugin root>/contracts/factory-task`;
 the plugin root is three directories above this skill's base directory.
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 **Inputs:** the task folder (`ticket.md`, `context.md`, `decisions.md`), the tier. Load the **domain skills**
 before routing.
 

@@ -8,6 +8,8 @@ description: Use as the build step of anmarkoulis:ship, or on a loop back from r
 Implements `plan.md`. Writes `impl/` in the task folder and never commits, pushes or opens a PR. Contracts:
 [../../../contracts/README.md](../../../contracts/README.md).
 
+**Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
+
 **Inputs:** `plan.md`, the working tree path and branch from `decisions.md`, `tier.md`, and on a loop the
 loop line's reason. Read the whole plan before asking anything.
 

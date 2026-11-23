@@ -19,6 +19,7 @@ Exactly these sections, in this order:
 ````markdown
 # <PR #N | branch | range>: <title>
 Lenses: bugs <ran | fallback>, standards <…>, every line <… | skipped>, security <… | off>.
+Layers: <list | none> (applied: <variants | none>).
 
 ## What this change does
 2–3 paragraphs of prose for someone who knows the product but not the ticket: the context, the problem today

@@ -25,5 +25,7 @@ which model runs a role) had to either change a shared file or put personal rule
 - A personal layer changes nothing for teammates and needs no repo change.
 - Two people running the same task folder can get different runs. The `layers:` and `resolution:` lines in
   `status.md` show which layers each run used.
+- Every skill with override points reads these lines when run on its own too
+  ([ADR 12](0012-layers-wherever-a-table-exists.md)).
 - `~/.claude/CLAUDE.md` is a Claude Code path. Another harness has no user-level source until one is added;
   the repo's `CLAUDE.local.md` still works.
