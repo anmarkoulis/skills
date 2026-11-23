@@ -52,8 +52,9 @@ comment in place). No ticket id, or the **plan destination** is `none`: skip and
 
 ## Done
 
-Log `plan stopped <date> plan.md awaiting answer`. `ship` shows the plan stop (with the execution method and the
-scope table from [../ship/stops.md](../ship/stops.md)) when the tier has it, otherwise logs `plan done`.
+Log `plan stopped <date> plan.md awaiting answer`. `ship` shows the plan stop (`plan.md` as the
+[stop contract](../../../contracts/README.md#stops) says, with the execution method and the scope table from
+[../ship/stops.md](../ship/stops.md)) when the tier has it, otherwise logs `plan done`.
 
 ## Override points
 

@@ -79,8 +79,15 @@ A loop never starts build unchecked ([ADR 10](../docs/decisions/0010-loop-cap.md
 
 ## Stops
 
-At a stop, print the file's absolute path, a 3–5 line summary and one question: **continue / change / stop
-here**. Before asking, log `<step> stopped <date> <file> awaiting answer`.
+At a stop, put the file in front of the user, then ask one question: **continue / change / stop here**. Before
+asking, log `<step> stopped <date> <file> awaiting answer`.
+
+- **Show the content:** print the file in full when it is short, else the sections the question is about. A
+  path alone is not showing it.
+- **Full paths:** name every file by its absolute path (`/Users/me/repo/.factory/42-fix-login/plan.md`, not
+  `plan.md` or `.factory/…`), in the text and in the question, so it is clickable in the terminal.
+- **Summary in the question:** put the 3–5 line summary in the question text itself; the question dialog can
+  hide what was printed before it.
 
 - **continue**: log `<step> done`, go on.
 - **change**: apply the correction, log `<step> changed … <reason>`, re-run the step, stop again. A change at
