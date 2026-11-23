@@ -1,3 +1,9 @@
+## [0.8.0](https://github.com/anmarkoulis/skills/compare/v0.7.0...v0.8.0) (2026-11-23)
+
+### Features
+
+* add base vs fix mode to manual-test ([#64](https://github.com/anmarkoulis/skills/issues/64)) ([9e22843](https://github.com/anmarkoulis/skills/commit/9e22843c7fca287bc3abd5e4d51bd9db7b06a2b7)), closes [#39](https://github.com/anmarkoulis/skills/issues/39)
+
 ## [0.7.0](https://github.com/anmarkoulis/skills/compare/v0.6.3...v0.7.0) (2026-11-23)
 
 ### Features
