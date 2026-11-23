@@ -1,3 +1,9 @@
+## [0.7.0](https://github.com/anmarkoulis/skills/compare/v0.6.3...v0.7.0) (2026-11-23)
+
+### Features
+
+* add a factory layer for this repo ([#62](https://github.com/anmarkoulis/skills/issues/62)) ([5e9e605](https://github.com/anmarkoulis/skills/commit/5e9e60536825b2fb620777573abdce102e7a2dd1))
+
 ## [0.6.3](https://github.com/anmarkoulis/skills/compare/v0.6.2...v0.6.3) (2026-11-23)
 
 ### Bug Fixes
