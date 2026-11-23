@@ -28,8 +28,11 @@ Ask first. Then, with the **git workflow** (default: plain git and `gh`):
 
 Write `pr-body.md`: what changed and why, the ticket link (GitHub: `Closes #<id>` only if the user wants the
 issue closed on merge, else `Part of #<id>`), how it was verified (levels and run numbers from `verify.md`),
-and the open gaps from `gaps.md`. With a PR-body skill installed (for example `mattpocock-skills:pr`), use it
-for the text. Show it, ask, then `gh pr create --body-file pr-body.md`. Record the url in `decisions.md`.
+and the open gaps from `gaps.md`. When there is a **PR template**, `pr-body.md` follows its sections in its
+order, drops its HTML comments, and answers every checklist item: ticked, or struck out with a reason. A box
+left empty is not an answer; the template's sections win over a PR-body skill's own shape. With a PR-body
+skill installed (for example `mattpocock-skills:pr`), use it for the text. Show it, ask, then
+`gh pr create --body-file pr-body.md`. Record the url in `decisions.md`.
 
 Compare the ticket with the final diff. If the scope changed, propose a ticket update through `anmarkoulis:tracker`
 and post only after a yes. Move the ticket to the **ticket state** for "in review" when a layer defines one.
@@ -60,3 +63,4 @@ Log `finalize stopped <date> pr-body.md awaiting answer` when the tier has a PR 
 | merge policy | a person merges (T2 always) | `set` (T0 and T1 only) |
 | ticket states | none | `set` |
 | cleanup commands | none; offer branch and worktree removal | `set` |
+| PR template | the repo's `.github/PULL_REQUEST_TEMPLATE.md`, else none (the shape above) | `set` |
