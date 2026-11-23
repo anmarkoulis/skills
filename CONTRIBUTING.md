@@ -21,9 +21,8 @@ design decision gets an ADR in [docs/decisions/](docs/decisions).
 
 ## Pull requests
 
-`main` is protected and squash-only, so **the PR title becomes the commit that semantic-release reads**. It
-sets the version bump: `fix:` gives a patch, `feat:` a minor, `!` or a `BREAKING CHANGE:` footer a major, and
-`docs:`, `chore:` and `ci:` give no release.
+Every PR follows [the PR template](.github/PULL_REQUEST_TEMPLATE.md): its title rules (the title becomes the
+squash commit that semantic-release reads), its sections, and its checklist.
 
 ## Checks to run locally
 
