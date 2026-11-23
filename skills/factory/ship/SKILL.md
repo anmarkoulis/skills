@@ -15,11 +15,13 @@ is three directories above this skill's base directory.
 
 1. **New run or resume?** If the user names a task folder, or `.factory/*/status.md` (or the layer's task
    folder location) holds one whose slug matches the request, resume it (below). Otherwise start at intake.
-2. **Layers.** Read the first `factory layers:` line from `AGENTS.md`, else `CLAUDE.md`, at the repo root. No
-   line: core only. Once the task folder exists, log
-   `ship done <date> status.md layers: <list or none> (from <file>)`.
-3. **Resolution table.** For every pipeline step, list which skills were found: the core skill plus each
-   declared layer's `<prefix>-<step>` that exists, for example `verify: anmarkoulis:verify + shop-verify` or
+2. **Layers.** Read the first `factory layers:` line from `AGENTS.md`, else `CLAUDE.md`, at the repo root, then
+   the first `factory personal layers:` line from `CLAUDE.local.md` at the repo root, else `~/.claude/CLAUDE.md`,
+   and append those prefixes ([layers](../../../contracts/README.md#layers)). No line: core only. Once the task
+   folder exists, log `ship done <date> status.md layers: <list or none> (from <file>[; <prefix> from <file>])`.
+3. **Resolution table.** For every pipeline step and every helper step (`tracker`, `delegate`, `debugging`,
+   `spec`, `qa-tests`, `manual-test`), list which skills were found: the core skill plus each declared layer's
+   `<prefix>-<step>` that exists, for example `verify: anmarkoulis:verify + shop-verify` or
    `tracker: anmarkoulis:tracker (no layer variant)`. A missing variant means the core default applies. Print the
    table, and once the task folder exists log `ship done <date> status.md resolution: <step>: <skills>; …`.
 4. **Accelerators.** Check the available skills for the soft dependencies each step names. Log
@@ -28,11 +30,13 @@ is three directories above this skill's base directory.
 ## Running a step
 
 1. **Collect overrides first.** For each declared layer, lowest first, invoke `<prefix>-<step>` if the
-   resolution table lists it, and collect its Overrides table. A higher layer's answer for a point replaces a
-   lower one's.
+   resolution table lists it, and collect its Overrides table and the sections its cells point to. Merge them by
+   the [merging rule](../../../contracts/README.md#merging): `set` and `replace` take the highest layer's answer,
+   `extend` keeps every layer's, lowest first. Collect the helper steps' variants the same way, once per session.
 2. **Run the core step** with the collected values applied: invoke `anmarkoulis:<step>` with the Skill tool and give
-   it the task folder's absolute path, the tier and the collected overrides. A `set` value replaces the default;
-   a `replace` swaps the mechanics of that point only.
+   it the task folder's absolute path, the tier, its collected overrides and the helper steps' overrides, which
+   it passes on to any helper step it calls. A `set` value replaces the default; a `replace` swaps the mechanics
+   of that point only.
    If `anmarkoulis:<step>` is not in the session's skills but `<plugin root>/skills/factory/<step>/SKILL.md`
    exists, follow that file as the step and log
    `ship done <date> status.md fallback: factory skills read from disk (plugin not loaded)`.

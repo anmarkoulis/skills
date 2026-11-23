@@ -1,6 +1,6 @@
 ---
 name: sk-build
-description: Extends anmarkoulis:build for the anmarkoulis/skills repo with its test and lint commands and REVIEW.md as extra brief rules. Used by anmarkoulis:ship through the sk layer.
+description: Extends anmarkoulis:build for the anmarkoulis/skills repo with its test and lint commands and REVIEW.md as extra brief rules. Not for direct use; anmarkoulis:ship applies it through the sk layer.
 ---
 | Point | This layer |
 |---|---|

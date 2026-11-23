@@ -14,8 +14,8 @@ directory.
 
 **Inputs:** the task folder (`ticket.md` for the type, `plan.md`, `spec.md` if present, the regression map in
 `verify.md`, the base sha in `decisions.md`). The run is one worker, picked with `anmarkoulis:delegate`, role
-`manual-tester`; the brief is the case list (step 1), how to reach the app (step 2), the task folder and this
-skill's path. A worker given this skill does the steps below itself.
+`manual-tester`; the brief is the case list (step 1), how to reach the app (step 2), the task folder, this
+skill's path and the overrides it was handed. A worker given this skill does the steps below itself.
 
 ## 1. Cases
 

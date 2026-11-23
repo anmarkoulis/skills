@@ -121,12 +121,52 @@ A repo declares its layers, lowest first, on one line in `AGENTS.md`, else `CLAU
 factory layers: acme, shop
 ```
 
-`ship` reads the line itself (it does not rely on the harness loading either file) and logs where it came from.
-No line means core only. For step `<step>`, `ship` first collects the Overrides table of each declared layer's
-`<prefix>-<step>` skill, lowest first, then runs the core skill `anmarkoulis:<step>` with those values, then runs
-the `extend` additions. A variant whose prefix is not declared is never
-used. A missing variant means the core default applies; `ship` logs a resolution table at the start of every
-run (`ship done <date> status.md resolution: …`) so it is visible.
+A person adds their own layer without touching the repo ([ADR 11](../docs/decisions/0011-personal-layer.md)):
+the first `factory personal layers: <prefix>` line in `CLAUDE.local.md` at the repo root, else in
+`~/.claude/CLAUDE.md`. Personal layers always come after the repo's; a prefix the repo already declares is not
+added twice.
+
+`ship` reads both lines itself (it does not rely on the harness loading these files) and logs where each came
+from: `ship done <date> status.md layers: acme, shop, me (from AGENTS.md; me from ~/.claude/CLAUDE.md)`. No line
+means core only. A variant whose prefix is not declared is never used. A missing variant means the core default
+applies; `ship` logs a resolution table at the start of every run (`ship done <date> status.md resolution: …`) so
+it is visible.
+
+### Steps and helper steps
+
+The pipeline steps are the ones `ship` runs. The **helper steps** (`tracker`, `delegate`, `debugging`, `spec`,
+`qa-tests`, `manual-test`) are called from inside other steps, and their variants apply there too:
+
+- `ship` collects the overrides of each pipeline step before running it, and of every helper step once per
+  session, and hands a step its own overrides plus the helper steps'.
+- A step that calls another step passes that step's overrides along with the call, and a nested call does the
+  same (verify → qa-tests → delegate).
+- A step run on its own, outside `ship`, gets no overrides. It says so in one line ("run outside ship: layers
+  skipped, core defaults apply") and uses the core defaults.
+
+### Merging
+
+For one step, `ship` collects the Overrides table of each declared layer's `<prefix>-<step>` skill, lowest first:
+
+| Allowed | Several layers answer |
+|---|---|
+| `set` | the highest layer's value wins |
+| `replace` | the highest layer's mechanics win |
+| `extend` | every layer's additions run, after the core's, lowest layer first |
+
+A row left at `default` is no answer: a lower layer's value stands.
+
+### Variant skills
+
+A variant `<prefix>-<step>` is config, not a wrapper: it never calls the core step, `ship` does.
+
+- **Where:** any skill folder the session loads: the project's `.claude/skills/`, the user's `~/.claude/skills/`,
+  or a plugin. Resolution is by name, so a company layer can live once at user level and serve every repo.
+- **Description:** says which skill it extends and that it is not for direct use, so it does not trigger on its
+  own: `Extends anmarkoulis:verify for the shop repo with … Not for direct use; anmarkoulis:ship applies it.`
+- **Body:** the Overrides table, then optional sections below it. A cell may point to a section by its heading
+  (`replace: see "Jira mechanics"`), and the section is read as part of the value. A `replace` always needs one:
+  a cell cannot hold mechanics.
 
 ## Override points
 
@@ -137,17 +177,20 @@ not in the table is not overridable.
 The contracts have no override points of their own: the task folder location is `intake`'s **task folder
 location** point.
 
-A variant skill answers with an **Overrides** table, `point | this layer`, and says in its description which
-skill it extends:
+A variant skill answers with an **Overrides** table, `point | this layer` ([variant skills](#variant-skills)):
 
 ```markdown
 ---
 name: shop-verify
-description: Extends anmarkoulis:verify for the shop repo with its test commands and staging quirks.
+description: Extends anmarkoulis:verify for the shop repo with its test commands and staging quirks. Not for direct use; anmarkoulis:ship applies it.
 ---
 | Point | This layer |
 |---|---|
 | L1 commands | set: `make test`, `make lint` |
+| A/B mechanism | replace: see "Base vs fix" |
+
+## Base vs fix
+Stop the stack, `git stash` the fix, `make up`, run the case, `git stash pop`.
 ```
 
 Layers may add and tighten freely. Loosening a rule (removing a stop, skipping a level the tier requires) needs
