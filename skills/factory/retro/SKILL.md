@@ -47,8 +47,9 @@ Three tables; write "none" under an empty one:
 ## 4. Ask once, apply only what is chosen
 
 First print every row in full: id, the file by its absolute path, the exact edit and why. Then one
-multi-select question whose options each carry the row's id and its edit in short, nothing pre-selected
-([stop contract](../../../contracts/README.md#stops)). No rows: skip it. Then, for the selected rows only:
+multi-select question whose options each carry the row's id and its edit in short, nothing pre-selected,
+and a last option **Apply nothing** ([stop contract](../../../contracts/README.md#stops)). Rows that do not fit
+beside it (the question tool takes at most 4 options) go in further questions of the same shape. No rows: skip it. Then, for the selected rows only:
 
 - Back up each file to `<task folder>/backup/<path>` before editing. Edit skills with
   `superpowers:writing-skills` when installed, else directly.
