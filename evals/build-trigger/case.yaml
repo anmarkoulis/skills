@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: build-trigger
+description: "a request phrased like the build description fires build"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    plan.md for the discount cap fix is approved. Implement it in the working tree now, tests first, and show me the red and green logs as evidence. Don't commit.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-build
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:build"'

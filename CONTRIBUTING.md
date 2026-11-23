@@ -38,7 +38,8 @@ claude plugin validate . --strict   # after touching .claude-plugin/
 
 ## Trying a skill
 
-A skill is done only once it has been tried in a session started with `claude --plugin-dir .`.
+A skill is done only once it has been tried in a session started with `claude --plugin-dir .` and its eval cases
+pass (`claude plugin eval`, see `AGENTS.md`).
 
 ## Releases
 

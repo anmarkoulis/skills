@@ -1,6 +1,6 @@
 ---
 name: build
-description: Use as the build step of anmarkoulis:ship, or on a loop back from review or verify, to implement plan.md in the working tree with tests first, and to re-verify the implementer's claims. Output is evidence (red and green logs), not a commit.
+description: Use before implementing an approved plan.md (tests first, red and green logs as evidence, no commit), as the build step of anmarkoulis:ship or on a loop back from review or verify. Load it first, before running git or editing any file; it also re-verifies the implementer's claims.
 ---
 
 # build

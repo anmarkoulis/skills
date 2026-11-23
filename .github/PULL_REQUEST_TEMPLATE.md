@@ -31,6 +31,7 @@ when the factory ran it). -->
 - [ ] `shellcheck contracts/factory-task tests/*.sh` (or the docker command in `AGENTS.md`)
 - [ ] `claude plugin validate . --strict` (when `.claude-plugin/` changed)
 - [ ] A changed skill was tried in a session started with `claude --plugin-dir <worktree or .>`
+- [ ] A changed skill's eval cases pass, and a new skill has a trigger case (`claude plugin eval`, see `AGENTS.md`)
 - [ ] A new skill is in `plugin.json`'s `skills` list; a general skill does not reuse a factory step's name
 - [ ] A shared rule changed only in `contracts/README.md`
 - [ ] Every changed core skill still ends with its Override points table

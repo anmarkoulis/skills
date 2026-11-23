@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: deep-review-trigger
+description: "a request phrased like the deep-review description fires deep-review"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Deep review my changes. I want the intent and a walkthrough, not just a bug list.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-deep-review
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:deep-review"'

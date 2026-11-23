@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: intake-trigger
+description: "a request phrased like the intake description fires intake"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    I'm starting on a bug: discount codes on big orders get capped wrong. Pin down which ticket this is, gather any prior work, flag mismatches and settle scope before any diagnosis or code.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-intake
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:intake"'

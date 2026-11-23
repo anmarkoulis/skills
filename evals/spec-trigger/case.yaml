@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: spec-trigger
+description: "a request phrased like the spec description fires spec"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    I want discount codes to stack (SAVE10 plus a loyalty code). Turn this into a written spec with every open question answered before we plan anything.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-spec
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:spec"'

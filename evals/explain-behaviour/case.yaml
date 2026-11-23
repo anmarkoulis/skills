@@ -1,0 +1,20 @@
+schema_version: "1.1"
+name: explain-behaviour
+description: "explain answers with a worked example citing file:line"
+tags: [behaviour]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Walk me through what cart.total("SAVE10") returns for a cart with one $200 TV. I expected 180 but I'm not sure.
+  max_turns: 12
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-explain
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:explain"'
+  - name: worked-example
+    type: llm
+    criteria: |
+      PASS only if the final answer traces a concrete worked example through the code with real numbers (subtotal 200, discount 20, the cap check, result 100), AND cites at least one file:line reference into cart/discount.py or cart/cart.py (for example cart/discount.py:13), AND says the cap check compares the order total instead of the discount. FAIL if it explains in general terms without line references.

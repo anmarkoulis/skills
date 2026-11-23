@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: review-trigger
+description: "a request phrased like the review description fires review"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Build and simplify are done for the discount cap fix. Review the change at the depth the tier sets, agree which findings to fix, and loop the fixes back to build before verify.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-review
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:review"'

@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: delegate-trigger
+description: "a request phrased like the delegate description fires delegate"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Build is about to hand the discount cap task to a worker. Pick who runs it (a specialist agent, a generic worker or inline), give it the brief and result-file contract, and log any fallback.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-delegate
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:delegate"'

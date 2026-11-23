@@ -27,6 +27,13 @@ Plugin agents go in `agents/` at the root. Skills for working on this repo itsel
   `docker run --rm -v "$PWD:/mnt" -w /mnt koalaman/shellcheck:stable contracts/factory-task tests/*.sh`.
 - `claude plugin validate .` after touching `.claude-plugin/`.
 - A skill is done only once it has been tried in a session started with `claude --plugin-dir .`.
+- Evals, locally only: `evals/` holds one trigger case per skill, near misses for skills that overlap, and a few
+  behaviour cases, on a shared fixture repo (`evals/fixture/`). Run them in two passes, since a tool grant applies
+  to every case and Bash changes which skill fires:
+  `claude plugin eval . --model haiku --runs 1 --ablation none --no-publish --trust-plugin --threshold 0 --scaffold --tag trigger --tag near-miss`, then
+  `claude plugin eval . --model haiku --runs 1 --ablation none --no-publish --trust-plugin --threshold 0 --scaffold --allow-tools Bash Write --tag behaviour`. `--case '<skill>-*'` runs one skill's cases;
+  `--no-publish` keeps the report in `evals/results/`. A changed skill keeps its cases passing, and a new skill
+  gets a trigger case.
 
 ## Running the factory on this repo
 
