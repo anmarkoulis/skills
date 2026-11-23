@@ -66,7 +66,7 @@ interrupts. Log `tier done <date> tier.md`.
 | `debugging` | one diagnosis | one diagnosis | two blind diagnoses, reconciled |
 | `spec` | premise check | grill when no spec exists | full grill and question ledger |
 | `build` method (recommended) | inline | by plan size | subagents per task, specialist agents |
-| `review` | local review | fresh-context review | deep review plus security review |
+| `review` | local review | fresh-context review | `deep-review`, security lens on |
 | `verify` | L1 | L1–L2 | L1–L3, base-vs-fix A/B, outside consumers |
 | simplify inventory | skipped | yes | yes |
 | `finalize` merge | merge policy | merge policy | a person merges |
