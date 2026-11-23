@@ -1,3 +1,9 @@
+## [0.6.2](https://github.com/anmarkoulis/skills/compare/v0.6.1...v0.6.2) (2026-11-23)
+
+### Bug Fixes
+
+* show the file's content at stops, with full paths ([#58](https://github.com/anmarkoulis/skills/issues/58)) ([69bc9fe](https://github.com/anmarkoulis/skills/commit/69bc9fe7d98b091e856e466b0fa3b517e46a11ac))
+
 ## [0.6.1](https://github.com/anmarkoulis/skills/compare/v0.6.0...v0.6.1) (2026-11-23)
 
 ### Bug Fixes
