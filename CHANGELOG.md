@@ -1,3 +1,9 @@
+## [0.10.0](https://github.com/anmarkoulis/skills/compare/v0.9.0...v0.10.0) (2026-11-23)
+
+### Features
+
+* resolve layers in every skill with override points ([#71](https://github.com/anmarkoulis/skills/issues/71)) ([ba61a79](https://github.com/anmarkoulis/skills/commit/ba61a79839c8563c9c295e77a4552c4bbeaa0bd0)), closes [#70](https://github.com/anmarkoulis/skills/issues/70)
+
 ## [0.9.0](https://github.com/anmarkoulis/skills/compare/v0.8.1...v0.9.0) (2026-11-23)
 
 ### Features
