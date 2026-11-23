@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: tracker-trigger
+description: "a request phrased like the tracker description fires tracker"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Read issue #12 with its comments and relations, then create a bug ticket for the discount cap problem.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-tracker
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:tracker"'

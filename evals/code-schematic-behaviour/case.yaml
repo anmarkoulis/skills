@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: code-schematic-behaviour
+description: "code-schematic writes a Mermaid flow plus a schematic"
+tags: [behaviour]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Draw me the flow of how cart.total applies a discount code. Entry point: Cart.total in cart/cart.py, at HEAD.
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Bash]
+  timeout_seconds: 600
+graders:
+  - name: fires-code-schematic
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:code-schematic"'
+  - name: writes-md
+    type: file_exists
+    path: "**/*.md"
+  - name: mermaid-and-schematic
+    type: llm
+    focus: trace
+    criteria: |
+      PASS only if Claude wrote a markdown file that contains a Mermaid flowchart (a ```mermaid block) of the Cart.total -> apply_discount path AND a layered pseudo-code schematic of the same path with file:line references. FAIL if either part is missing or nothing was written.

@@ -1,6 +1,6 @@
 ---
 name: debugging
-description: Use as the bug branch of anmarkoulis:understand, or when asked to "debug", "diagnose" or "find the root cause of" a bug, to find the root cause with one diagnosis or with two blind ones reconciled into one verdict in combined.md. Diagnosis only; it never fixes.
+description: 'Use before investigating any bug report ("debug", "diagnose", "find the root cause", "why does X come out wrong"), and as the bug branch of anmarkoulis:understand. Load it first, then read the code; it finds the root cause with one diagnosis, or two blind ones reconciled, in combined.md. Diagnosis only; it never fixes.'
 ---
 
 # debugging

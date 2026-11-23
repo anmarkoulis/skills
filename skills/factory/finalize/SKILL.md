@@ -1,6 +1,6 @@
 ---
 name: finalize
-description: Use as the finalize step of anmarkoulis:ship, after verify passes, to commit, push, open the PR, update the ticket, follow CI to green and apply the merge policy, each with the user's yes.
+description: Use before committing, pushing or opening a PR for verified work ("finalize it", "commit, push and open the PR"), and as the finalize step of anmarkoulis:ship. Load it first, before running git; it commits, pushes, opens the PR, updates the ticket, follows CI to green and applies the merge policy, each with the user's yes.
 ---
 
 # finalize

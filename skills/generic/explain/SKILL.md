@@ -1,6 +1,6 @@
 ---
 name: explain
-description: 'Use when asked to explain code, a flow, a concept, a finding, a bug or a condition ("explain how X works", "walk me through it", "is this real?"), or to write a review finding, PR comment or commit message about one. Every answer is a worked example traced through the real lines.'
+description: 'Use before answering any request to explain or walk through code, a flow, a concept, a finding, a bug or a condition ("explain how X works", "walk me through what this returns", "why does it do that?", "is this real?"), and before writing a review finding, PR comment or commit message about one. Load it first, then read the code; every answer is a worked example traced through the real lines.'
 ---
 
 # explain

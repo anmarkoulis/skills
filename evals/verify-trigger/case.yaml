@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: verify-trigger
+description: "a request phrased like the verify description fires verify"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Verify this branch: test it, tell me what is covered and write down what is not proven.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-verify
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:verify"'

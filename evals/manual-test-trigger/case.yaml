@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: manual-test-trigger
+description: "a request phrased like the manual-test description fires manual-test"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    This discount change is user-facing and needs hands-on proof in the running app, not just unit tests. Can a manual pass be done here, and which cases would it cover?
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-manual-test
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:manual-test"'

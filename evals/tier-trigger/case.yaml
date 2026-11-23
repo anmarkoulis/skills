@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: tier-trigger
+description: "a request phrased like the tier description fires tier"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    The discount cap fix touches money, so treat this as T2.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-tier
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:tier"'

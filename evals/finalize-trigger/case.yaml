@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: finalize-trigger
+description: "a request phrased like the finalize description fires finalize"
+tags: [trigger]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: |
+    Verify passed on this change. Now commit it, push, open the PR, update the ticket and follow CI to green.
+  max_turns: 4
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: fires-finalize
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"anmarkoulis:finalize"'
