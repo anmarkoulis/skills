@@ -26,3 +26,9 @@ Plugin agents go in `agents/` at the root. Skills for working on this repo itsel
   `shellcheck` on `contracts/factory-task` and `tests/*.sh`. CI runs both.
 - `claude plugin validate .` after touching `.claude-plugin/`.
 - A skill is done only once it has been tried in a session started with `claude --plugin-dir .`.
+
+## Running the factory on this repo
+
+Run `anmarkoulis:ship` here from a session started with `claude --plugin-dir <worktree or .>`, so it uses the
+skills on the branch, not the installed copy in `~/.claude/plugins/cache/`. `--plugin-dir` wins over an
+installed `anmarkoulis` of any version; nothing needs disabling.
