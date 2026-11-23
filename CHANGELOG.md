@@ -1,3 +1,9 @@
+## [0.8.1](https://github.com/anmarkoulis/skills/compare/v0.8.0...v0.8.1) (2026-11-23)
+
+### Bug Fixes
+
+* **retro:** offer an explicit apply-nothing option ([#66](https://github.com/anmarkoulis/skills/issues/66)) ([39d679e](https://github.com/anmarkoulis/skills/commit/39d679ed780481252caf21fc37c39397baa36f0c))
+
 ## [0.8.0](https://github.com/anmarkoulis/skills/compare/v0.7.0...v0.8.0) (2026-11-23)
 
 ### Features
