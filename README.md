@@ -2,13 +2,7 @@
 
 Generic agent skills for Claude Code (OpenCode and Codex planned), packaged as one plugin with its own marketplace.
 
-> **Status: v0.1 done.** All v0.1 skills of the factory are written, and real tickets have run
-> through them: [#18](https://github.com/anmarkoulis/skills/issues/18)
-> ([PR #20](https://github.com/anmarkoulis/skills/pull/20)) and
-> [#29](https://github.com/anmarkoulis/skills/issues/29)
-> ([PR #31](https://github.com/anmarkoulis/skills/pull/31)). Settled decisions are recorded as ADRs in
-> [docs/decisions/](docs/decisions); the v0.1 spec and the work on each skill are tracked in
-> [GitHub Issues](https://github.com/anmarkoulis/skills/issues).
+> **Status: v0.1 done.** All v0.1 skills of the factory are written and have run real tickets.
 
 ## factory
 
