@@ -12,8 +12,8 @@ rules: [../../../contracts/README.md](../../../contracts/README.md). `ft` means
 directory.
 
 **Inputs:** the task folder, the touched area (from the regression map in `verify.md`), the suite location if
-known. The run is one worker, picked with `anmarkoulis:delegate`, role `qa-runner`; the brief is these inputs plus
-this skill's path. A worker given this skill does the steps below itself.
+known. The run is one worker, picked with `anmarkoulis:delegate`, role `qa-runner`; the brief is these inputs, this
+skill's path and the overrides it was handed. A worker given this skill does the steps below itself.
 
 ## 1. Find the suite
 

@@ -47,6 +47,7 @@ Never trust "PASS", "pre-existing" or "unchanged":
 3. Re-check every "pre-existing" claim: the base command and its output must be in a log; otherwise run the
    base A/B yourself.
 4. Run the **lint command** on the touched files. A new issue on a line we wrote is ours.
+5. Run the **extra lead checks** a layer adds, each with its output saved to `impl/`.
 
 The result is a verdict: `success`, `flawed` (re-dispatch with the failing evidence) or `blocked`.
 
@@ -66,3 +67,4 @@ The result is a verdict: `success`, `flawed` (re-dispatch with the failing evide
 | test command | the repo's documented test command (README, `AGENTS.md`, `Makefile`, package scripts); ask if none | `set` |
 | lint command | the repo's documented linter; none if there is none | `set` |
 | extra brief rules | none | `extend` |
+| extra lead checks | none: the four checks in step 3 | `extend` |

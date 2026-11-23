@@ -92,7 +92,35 @@ factory (skills/factory/)  generic steps, contracts, tier engine
 
 A repo declares zero or more layers, lowest first, in its `AGENTS.md`. Each layer names its skills
 `<prefix>-<step>` and says it extends the core step. See
-[ADR 2](docs/decisions/0002-layers-and-prefixed-variants.md).
+[ADR 2](docs/decisions/0002-layers-and-prefixed-variants.md). `/anmarkoulis:setup` writes the line and
+scaffolds the variants. The rules are in [contracts/README.md](contracts/README.md#layers); in short:
+
+- **Personal layer.** `factory personal layers: me` in `CLAUDE.local.md` (this repo) or `~/.claude/CLAUDE.md`
+  (every repo) adds your own layer on top of the repo's, without touching it
+  ([ADR 11](docs/decisions/0011-personal-layer.md)).
+- **Where variants live.** Any skill folder the session loads: the repo's `.claude/skills/`, your
+  `~/.claude/skills/`, or a plugin. A company layer can live once at user level.
+- **What a variant holds.** An Overrides table answering the core step's Override points, and sections below it
+  that a cell points to. A `replace` always needs such a section. Its description ends with
+  "Not for direct use; anmarkoulis:ship applies it." so it does not trigger on its own.
+- **Several layers.** `set` and `replace`: the highest layer wins. `extend`: every layer's additions run, lowest
+  first.
+- **Helper steps** (`tracker`, `delegate`, `debugging`, `spec`, `qa-tests`, `manual-test`) take variants too, and
+  they apply wherever another step calls them: an `acme-tracker` that replaces the mechanics with another tracker
+  is what intake, plan and finalize use.
+- **Only `ship` applies layers.** A step run on its own says "layers skipped" and uses the core defaults.
+
+### Moving from your own end-to-end skill
+
+1. Run `/anmarkoulis:setup`: declare the layers and scaffold one variant per step you change, every row at
+   `default`.
+2. Go through the old skill one rule at a time. A rule that answers an Override point becomes that row (`set` a
+   value, `extend` an addition, `replace` with a section below the table). Put team facts in the repo or company
+   layer and your own habits in the personal layer.
+3. A rule that fits no point is either already a core default (drop it), belongs in `AGENTS.md` or `CLAUDE.md`,
+   or is a missing point: open an issue here rather than forking the step.
+4. Run one small ticket with `/anmarkoulis:ship` and check the resolution table lists every variant you wrote.
+5. Retire the old skill once a run went through. Until then the two work side by side (ADR 2, adoption).
 
 ## Dependencies
 

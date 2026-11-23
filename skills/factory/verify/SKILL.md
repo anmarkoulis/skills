@@ -32,8 +32,8 @@ consumers. Run each required level; skip one only with a written reason, shown a
   user-facing changes. For a bug, manual-test runs each case on the base and on the fix; a case the base does not
   reproduce goes to `gaps.md` as `L3 unproven: base did not reproduce <case>`, and the verdict is `manual`, never
   a pass.
-- **L4, after deploy:** staging or production retests and monitoring. List them as follow-ups; never run them
-  unasked.
+- **L4, after deploy:** staging or production retests and monitoring, plus the **L4 follow-ups** a layer adds.
+  List them as follow-ups; never run them unasked.
 - **A/B (T2):** run the new tests on the base without the production change and show they fail, using the **A/B
   mechanism** (default: rule 4 of [../build/brief.md](../build/brief.md)).
 
@@ -66,3 +66,4 @@ staging, production data). Add items found but out of scope, one line each.
 | outside consumers | none known; grep what the map finds | `extend` |
 | A/B mechanism | patch out the production diff, run, re-apply | `replace` |
 | environment quirks | none | `extend` |
+| L4 follow-ups | the retests and monitoring the regression map suggests | `extend` |

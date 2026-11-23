@@ -1,6 +1,6 @@
 ---
 name: sk-tier
-description: Extends anmarkoulis:tier for the anmarkoulis/skills repo with minimum tiers for the contracts, plugin manifest and workflows, and the release files as sensitive. Used by anmarkoulis:ship through the sk layer.
+description: Extends anmarkoulis:tier for the anmarkoulis/skills repo with minimum tiers for the contracts, plugin manifest and workflows, and the release files as sensitive. Not for direct use; anmarkoulis:ship applies it through the sk layer.
 ---
 | Point | This layer |
 |---|---|

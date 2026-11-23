@@ -23,7 +23,8 @@ Three ways to run the same work:
 | 2 | a generic worker, given the brief plus the procedure the specialist carried | where subagents exist |
 | 3 | this session, inline, under the same contract | everywhere |
 
-Selection, most specific first: the agent the plan task names, then the **agent routing** for the role or the
+The **model per role** a layer sets is passed with the dispatch at levels 1 and 2; inline, it does not apply
+(say so in one line). Selection, most specific first: the agent the plan task names, then the **agent routing** for the role or the
 touched paths, then a generic worker, then inline. Subagents are a Claude Code feature (the Agent tool); without
 them, run inline.
 
@@ -58,7 +59,8 @@ answer nobody can give is broken.
 The caller's brief, plus:
 
 1. The task in one or two sentences.
-2. The exact values: ids, paths, shas, the task folder. A worker has none of the caller's context.
+2. The exact values: ids, paths, shas, the task folder, and the layer overrides the work depends on. A worker
+   has none of the caller's context.
 3. Where to write: the result file path in the caller's task folder.
 4. What to return (below).
 5. Its tool budget: the narrowest set that does the job. A worker that only reads needs no `Edit`.
@@ -91,3 +93,4 @@ list of ids, an item known to be there. Well-formed is not verified.
 | Point | Default | Allowed |
 |---|---|---|
 | agent routing | the default routing above | `set` (role or path → agent; roles: implementer, reviewer, diagnoser, qa-runner, manual-tester) |
+| model per role | the agent's own model; a generic worker inherits the session's | `set` (role → model) |

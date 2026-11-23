@@ -1,6 +1,6 @@
 ---
 name: sk-verify
-description: Extends anmarkoulis:verify for the anmarkoulis/skills repo with its L1 commands, a headless plugin run as L3, and its shell quirks. Used by anmarkoulis:ship through the sk layer.
+description: Extends anmarkoulis:verify for the anmarkoulis/skills repo with its L1 commands, a headless plugin run as L3, and its shell quirks. Not for direct use; anmarkoulis:ship applies it through the sk layer.
 ---
 | Point | This layer |
 |---|---|

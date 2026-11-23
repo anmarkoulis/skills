@@ -15,7 +15,8 @@ tool.
   `factory layers: <prefix>, <prefix>`.
 - The factory does not rely on the harness loading `AGENTS.md`. `ship`, and any step that needs the layers,
   reads the declaration itself: the first `factory layers:` line in `AGENTS.md`, then `CLAUDE.md`, at the repo
-  root. It logs which file the line came from in `status.md`. No line means core only.
+  root. It logs which file the line came from in `status.md`. No line means core only. A person's own layer is
+  declared outside the repo ([ADR 11](0011-personal-layer.md)).
 - A layer's skills are named `<prefix>-<step>` and say in their description which skill they extend.
 - For step `<step>` the factory loads the core skill, then each declared layer's `<prefix>-<step>` in order, if
   it exists. A variant whose prefix the repo does not declare is never used.

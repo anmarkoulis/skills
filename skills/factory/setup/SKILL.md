@@ -17,23 +17,33 @@ Ask for the layers, lowest first (for example a company prefix, then the project
 place; no `AGENTS.md`: create it with just that line, unless `CLAUDE.md` already holds the line), and write it
 after a yes.
 
+Then ask whether the user wants a personal layer, one only they use. Yes: show
+`factory personal layers: <prefix>` as a diff against `CLAUDE.local.md` at the repo root (this repo only) or
+`~/.claude/CLAUDE.md` (every repo), and write it after a yes
+([ADR 11](../../../docs/decisions/0011-personal-layer.md)).
+
 ## 2. Variants
 
 For each layer, ask which steps it varies. For each chosen step:
 
 1. Read the core skill's **Override points** table.
-2. Show, then after a yes write, `.claude/skills/<prefix>-<step>/SKILL.md` (a shared company layer may live in
-   its own repo instead; ask where):
+2. Ask where the layer lives: the repo's `.claude/skills/` (the team gets it), the user's `~/.claude/skills/`
+   (every repo of this user; the default for a personal layer), or a company layer's own repo. Show, then after
+   a yes write, `<folder>/<prefix>-<step>/SKILL.md`:
 
    ```markdown
    ---
    name: <prefix>-<step>
-   description: Extends anmarkoulis:<step> for <repo or company> with <what this layer changes>.
+   description: Extends anmarkoulis:<step> for <repo or company> with <what this layer changes>. Not for direct use; anmarkoulis:ship applies it.
    ---
    | Point | This layer |
    |---|---|
    | <every point from the core table> | default |
    ```
+
+   Do this for the helper steps the user names too (`tracker`, `delegate`, `debugging`, `spec`, `qa-tests`,
+   `manual-test`); their variants apply wherever another step calls them. A `replace` row gets a section below
+   the table holding the mechanics ([variant skills](../../../contracts/README.md#variant-skills)).
 
 3. A core skill whose table says none gets no variant; say so.
 

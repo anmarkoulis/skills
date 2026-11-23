@@ -1,6 +1,6 @@
 ---
 name: sk-plan
-description: Extends anmarkoulis:plan for the anmarkoulis/skills repo so plans stay in the task folder and are not posted to the issue. Used by anmarkoulis:ship through the sk layer.
+description: Extends anmarkoulis:plan for the anmarkoulis/skills repo so plans stay in the task folder and are not posted to the issue. Not for direct use; anmarkoulis:ship applies it through the sk layer.
 ---
 | Point | This layer |
 |---|---|
