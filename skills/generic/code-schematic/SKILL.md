@@ -40,7 +40,8 @@ scope ends.
    - One node per function: `id["name<br/>path:line"]`.
    - Decisions are diamonds: `id{"condition?"}`, with the outcome on each edge.
    - Every outcome that ends the flow (return, error, exit, stop) is its own node. So is an exception that
-     escapes to the caller (`raises KeyError → request fails`).
+     escapes to the caller (`raises KeyError → request fails`), and so is each side effect on the way: a
+     database write and a call to an outside service.
    - A gate made of chained `and`s, or evaluated inside a filter, is one diamond per input that can refuse, all
      joining the single outcome node the caller tests (`no recipients → return`).
    - Work handed to another process (a queue task, a webhook, an outbox) joins with a dotted edge: `-.->`.

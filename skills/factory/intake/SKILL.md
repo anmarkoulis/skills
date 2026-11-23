@@ -51,7 +51,8 @@ scope batch and repeat it at the stop.
 ## 5. Workspace
 
 - If the current branch has a PR (`gh pr list --head <branch> --state all`), report its state. A merged or closed
-  PR means the branch is stale: start from the base branch.
+  PR means the branch is stale: start from the base branch. Commits on it that still matter are cherry-picked onto
+  the new branch, never pushed to the stale one.
 - Ask **worktree or inline**. Never pick for the user.
 - **Worktree:** the **workspace command** a layer sets, else `git worktree add <path> -b <branch> <base>`. Then
   move the task folder: `ft -C <worktree> path <slug> [<location>]`, move the contents there, remove the old
