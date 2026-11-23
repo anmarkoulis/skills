@@ -1,3 +1,9 @@
+## [0.13.0](https://github.com/anmarkoulis/skills/compare/v0.12.0...v0.13.0) (2026-11-23)
+
+### Features
+
+* add plugin eval cases and fix four skill triggers ([#74](https://github.com/anmarkoulis/skills/issues/74)) ([93359dd](https://github.com/anmarkoulis/skills/commit/93359dd3ce69daa8d1ee3df0eb67dd79825a3781)), closes [#56](https://github.com/anmarkoulis/skills/issues/56)
+
 ## [0.12.0](https://github.com/anmarkoulis/skills/compare/v0.11.0...v0.12.0) (2026-11-23)
 
 ### Features
