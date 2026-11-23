@@ -2,13 +2,7 @@
 
 Generic agent skills for Claude Code (OpenCode and Codex planned), packaged as one plugin with its own marketplace.
 
-> **Status: v0.1 done.** All v0.1 skills of the factory are written, and real tickets have run
-> through them: [#18](https://github.com/anmarkoulis/skills/issues/18)
-> ([PR #20](https://github.com/anmarkoulis/skills/pull/20)) and
-> [#29](https://github.com/anmarkoulis/skills/issues/29)
-> ([PR #31](https://github.com/anmarkoulis/skills/pull/31)). Settled decisions are recorded as ADRs in
-> [docs/decisions/](docs/decisions); the v0.1 spec and the work on each skill are tracked in
-> [GitHub Issues](https://github.com/anmarkoulis/skills/issues).
+> **Status: v0.1 done.** All v0.1 skills of the factory are written and have run real tickets.
 
 ## factory
 
@@ -55,14 +49,35 @@ Usable on their own, outside the factory (`skills/generic/`).
 
 ## Install
 
+From a Claude Code session:
+
 ```
 /plugin marketplace add anmarkoulis/skills
 /plugin install anmarkoulis@anmarkoulis-skills
 ```
 
-Skills are invoked as `/anmarkoulis:<skill>`, for example `/anmarkoulis:ship #42`. Installed the earlier
-`factory@anmarkoulis-skills`? Uninstall it and install `anmarkoulis@anmarkoulis-skills`; the old id no longer
-receives updates.
+Or from a shell:
+
+```
+claude plugin marketplace add anmarkoulis/skills
+claude plugin install anmarkoulis@anmarkoulis-skills
+```
+
+Restart Claude Code, then run `/plugin` to check that `anmarkoulis` is installed and enabled. Skills are
+invoked as `/anmarkoulis:<skill>`, for example `/anmarkoulis:ship #42`, and also trigger from their
+descriptions.
+
+To update, refresh the marketplace and update the plugin, then restart:
+
+```
+claude plugin marketplace update anmarkoulis-skills
+claude plugin update anmarkoulis@anmarkoulis-skills
+```
+
+To try a local checkout without installing, start Claude Code with `claude --plugin-dir /path/to/skills`.
+
+Installed the earlier `factory@anmarkoulis-skills`? Uninstall it and install `anmarkoulis@anmarkoulis-skills`;
+the old id no longer receives updates.
 
 ## How it is meant to be used
 
@@ -84,6 +99,10 @@ A repo declares zero or more layers, lowest first, in its `AGENTS.md`. Each laye
 None required. If [superpowers](https://github.com/obra/superpowers) or
 [mattpocock/skills](https://github.com/mattpocock/skills) are installed, steps use them for more depth;
 without them, each step follows its own built-in procedure.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Contributors are listed in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## License
 
