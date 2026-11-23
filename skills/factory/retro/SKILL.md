@@ -28,8 +28,9 @@ About one page, fixed sections in this order; every line actionable or reusable:
 - `## What didn't`: each item with its cost (rework, wrong turn, near miss), including agent claims that turned
   out wrong and what caught them.
 - `## Friction`: each entry starts with one type: `navigation`, `check` (an automated check could have caught
-  it), `standard` (a review rule is missing or wrong), `steering` (an instruction file line is wrong or a
-  no-op), `tool-cost`, `information` (a needed fact was not reachable), `skill` (a skill was wrong or stale).
+  it), `standard` (a review rule is missing or wrong; name the reviewer's file it belongs in, such as
+  `REVIEW.md`), `steering` (an instruction file line is wrong or a no-op), `tool-cost`, `information` (a needed
+  fact was not reachable), `skill` (a skill was wrong or stale).
   Name the skill or tool, what it said and what actually worked.
 - `## Promote`: what should become a skill edit, an agent or a check, each `proposed`, `applied <date>` or
   `declined`.
@@ -43,8 +44,10 @@ Three tables; write "none" under an empty one:
   fixed.
 - **Proposed agents:** `# | name | tools | model | brief`, only where a specialist could have done part of the
   work and none exists.
-- **Checks:** `# | kind (lint rule, pre-commit hook, CI job, test) | where | what it fails on | why`. A mechanical
-  mistake (a fixed pattern, a banned call, a wrong directory) gets a check, not a written rule.
+- **Checks:** `# | kind (lint rule, pre-commit hook, settings hook, CI job, test) | where | what it fails on |
+  why`. A mechanical mistake (a fixed pattern, a banned call, a wrong directory) gets a check, not a written
+  rule. A settings hook is a Claude Code hook in `.claude/settings.json`; in another harness, use a pre-commit
+  hook or a CI job instead.
 
 ## 4. Ask once, apply only what is chosen
 
