@@ -33,3 +33,8 @@ Plugin agents go in `agents/` at the root. Skills for working on this repo itsel
 Run `anmarkoulis:ship` here from a session started with `claude --plugin-dir <worktree or .>`, so it uses the
 skills on the branch, not the installed copy in `~/.claude/plugins/cache/`. `--plugin-dir` wins over an
 installed `anmarkoulis` of any version; nothing needs disabling.
+
+factory layers: sk
+
+The `sk` layer's variants are in `.claude/skills/sk-<step>/`; path rules for review and build are in
+[REVIEW.md](REVIEW.md).
