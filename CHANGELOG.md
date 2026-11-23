@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/anmarkoulis/skills/compare/v0.6.0...v0.6.1) (2026-11-23)
+
+### Bug Fixes
+
+* finalize, build and AGENTS.md snags from [#36](https://github.com/anmarkoulis/skills/issues/36) and [#37](https://github.com/anmarkoulis/skills/issues/37) runs ([#59](https://github.com/anmarkoulis/skills/issues/59)) ([be7c2b1](https://github.com/anmarkoulis/skills/commit/be7c2b1e6b5c9e864a6836d66eac41323b3befa8)), closes [#43](https://github.com/anmarkoulis/skills/issues/43) [#44](https://github.com/anmarkoulis/skills/issues/44)
+
 ## [0.6.0](https://github.com/anmarkoulis/skills/compare/v0.5.0...v0.6.0) (2026-11-23)
 
 ### Features
