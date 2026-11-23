@@ -1,3 +1,9 @@
+## [0.11.0](https://github.com/anmarkoulis/skills/compare/v0.10.0...v0.11.0) (2026-11-23)
+
+### Features
+
+* add a PR template and have finalize follow it ([#72](https://github.com/anmarkoulis/skills/issues/72)) ([fb4d696](https://github.com/anmarkoulis/skills/commit/fb4d6962ece64704db22aa740d1c4d9d6ca95fef)), closes [#63](https://github.com/anmarkoulis/skills/issues/63)
+
 ## [0.10.0](https://github.com/anmarkoulis/skills/compare/v0.9.0...v0.10.0) (2026-11-23)
 
 ### Features
