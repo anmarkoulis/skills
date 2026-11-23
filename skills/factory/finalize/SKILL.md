@@ -20,7 +20,7 @@ Ask first. Then, with the **git workflow** (default: plain git and `gh`):
 - Stage the changed files by name, never `git add -A`. Follow the repo's commit conventions
   (`CONTRIBUTING.md`, `AGENTS.md`, recent history); the user's own instructions win.
 - Push the branch from `decisions.md`. Never push to the default branch.
-- In a worktree, run every git command as `git -C <worktree>`; the session's cwd may be another checkout.
+- In a worktree, run git as `git -C <worktree>` (and gh from it); the shell may start in the main checkout.
 
 ## 3. PR
 
@@ -34,7 +34,8 @@ and post only after a yes. Move the ticket to the **ticket state** for "in revie
 
 ## 4. CI
 
-Watch the checks (`gh pr checks <n> --watch`). A failure caused by the change goes back to build as
+Watch the checks (`gh pr checks <n> --watch`). Right after `gh pr create` it can report no checks; re-run until
+they are listed. A failure caused by the change goes back to build as
 `finalize loop <date> pr-body.md →build <failing check>` (then review and verify run again). A failure that is
 not ours needs the same evidence rule as a pre-existing test failure: the same check failing on the base.
 
