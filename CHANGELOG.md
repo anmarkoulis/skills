@@ -1,3 +1,9 @@
+## [0.6.0](https://github.com/anmarkoulis/skills/compare/v0.5.0...v0.6.0) (2026-11-23)
+
+### Features
+
+* add deep-review skill ([#51](https://github.com/anmarkoulis/skills/issues/51)) ([af0a533](https://github.com/anmarkoulis/skills/commit/af0a53316e84beda513fedaf37a1daeec693fc5c))
+
 ## [0.5.0](https://github.com/anmarkoulis/skills/compare/v0.4.0...v0.5.0) (2026-11-22)
 
 ### Features
