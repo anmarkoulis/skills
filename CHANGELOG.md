@@ -1,3 +1,9 @@
+## [0.12.0](https://github.com/anmarkoulis/skills/compare/v0.11.0...v0.12.0) (2026-11-23)
+
+### Features
+
+* restore retro, intake and code-schematic rules from old skills ([#73](https://github.com/anmarkoulis/skills/issues/73)) ([a3686c4](https://github.com/anmarkoulis/skills/commit/a3686c456b5637c65f5fb1837585b10eb8a63643))
+
 ## [0.11.0](https://github.com/anmarkoulis/skills/compare/v0.10.0...v0.11.0) (2026-11-23)
 
 ### Features
