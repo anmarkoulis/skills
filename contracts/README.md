@@ -3,6 +3,9 @@
 What every step skill and every layer variant relies on. Decisions behind them:
 [docs/decisions/](../docs/decisions).
 
+Skills are named `anmarkoulis:<skill>`, their Claude Code plugin name; another harness loads `<skill>`. How each
+Claude Code feature the skills name maps to another harness: [docs/harnesses/](../docs/harnesses).
+
 ## Task folder
 
 One folder per piece of work. Only `intake` creates it, with the resolver script in this folder:
