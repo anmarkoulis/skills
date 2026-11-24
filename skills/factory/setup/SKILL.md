@@ -18,9 +18,9 @@ place; no `AGENTS.md`: create it with just that line, unless `CLAUDE.md` already
 after a yes.
 
 Then ask whether the user wants a personal layer, one only they use. Yes: show
-`factory personal layers: <prefix>` as a diff against `CLAUDE.local.md` at the repo root (this repo only) or
-`~/.claude/CLAUDE.md` (every repo), and write it after a yes
-([ADR 11](../../../docs/decisions/0011-personal-layer.md)).
+`factory personal layers: <prefix>` as a diff against `CLAUDE.local.md` at the repo root (this repo only, above
+the repo's layers) or `~/.claude/CLAUDE.md` (every repo, below each repo's layers, as defaults), and write it after
+a yes ([ADR 14](../../../docs/decisions/0014-user-and-local-layers.md)).
 
 ## 2. Variants
 

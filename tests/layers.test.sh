@@ -34,4 +34,8 @@ bad=$(scan $files)
 [ -z "$bad" ] || fail "override points without a link to $pointer:
 $bad"
 ! grep -n "helper step" contracts/README.md README.md skills/factory/ship/SKILL.md skills/factory/setup/SKILL.md || fail "fixed helper list still named"
+# The old order (personal above the repo, local else user) must not come back (#76).
+! grep -nE "come after the repo's|else (in )?\`~/\.claude/CLAUDE\.md\`" contracts/README.md README.md skills/factory/ship/SKILL.md \
+  skills/factory/setup/SKILL.md || fail "old layer order still stated"
+grep -q 'core < user < repo < local' contracts/README.md || fail "contract does not state the layer order"
 echo "layers: ok"

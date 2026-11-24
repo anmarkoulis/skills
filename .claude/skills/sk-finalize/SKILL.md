@@ -6,5 +6,5 @@ description: Extends anmarkoulis:finalize for the anmarkoulis/skills repo with i
 |---|---|
 | git workflow | default |
 | merge policy | default |
-| ticket states | default |
+| ticket states | set: `none` (GitHub issues close through `Closes #<id>`; a user layer's tracker states do not apply here) |
 | cleanup commands | default |

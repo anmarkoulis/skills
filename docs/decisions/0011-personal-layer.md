@@ -1,6 +1,6 @@
 # 11. A personal layer declared outside the repo
 
-Date: 2026-11-23. Status: accepted.
+Date: 2026-11-23. Status: accepted; the ordering is superseded by [ADR 14](0014-user-and-local-layers.md).
 
 ## Context
 

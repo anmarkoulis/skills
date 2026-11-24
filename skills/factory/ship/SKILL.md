@@ -15,10 +15,13 @@ is three directories above this skill's base directory.
 
 1. **New run or resume?** If the user names a task folder, or `.factory/*/status.md` (or the layer's task
    folder location) holds one whose slug matches the request, resume it (below). Otherwise start at intake.
-2. **Layers.** Read the first `factory layers:` line from `AGENTS.md`, else `CLAUDE.md`, at the repo root, then
-   the first `factory personal layers:` line from `CLAUDE.local.md` at the repo root, else `~/.claude/CLAUDE.md`,
-   and append those prefixes ([layers](../../../contracts/README.md#layers)). No line: core only. Once the task
-   folder exists, log `ship done <date> status.md layers: <list or none> (from <file>[; <prefix> from <file>])`.
+2. **Layers.** Read the three lines and order their prefixes core < user < repo < local
+   ([layers](../../../contracts/README.md#layers)): the first `factory personal layers:` line in `~/.claude/CLAUDE.md`
+   (user), the first `factory layers:` line in `AGENTS.md`, else `CLAUDE.md`, at the repo root (repo), and the
+   first `factory personal layers:` line in `CLAUDE.local.md` at the repo root (local). No line: core only. Once
+   the task folder exists, log
+   `ship done <date> status.md layers: <prefix> (<level>) < … or none (from <file>; …)`, for example
+   `layers: am (user) < sk (repo) (from ~/.claude/CLAUDE.md; AGENTS.md)`.
    Then resolve ship's own points ([resolving layers](../../../contracts/README.md#resolving-layers)).
 3. **Resolution table.** For every skill of this plugin whose Override points table has a point, list which
    skills were found: the core skill plus each declared layer's `<prefix>-<skill>` that exists, for example
