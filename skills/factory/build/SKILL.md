@@ -25,7 +25,7 @@ reason (the tier's recommendation, then the plan's size):
 |---|---|---|
 | Inline | this session follows the brief itself | `superpowers:executing-plans` |
 | Subagents | one implementer per task, plus a reviewer per task at T2 | `superpowers:subagent-driven-development` |
-| One background agent | a single agent runs the whole plan | — |
+| One background agent | a single agent runs the whole plan (a Claude Code background Agent; without it, one foreground worker or inline) | — |
 
 Pick each worker (roles `implementer` and `reviewer`) with `anmarkoulis:delegate`, which logs every fallback.
 If the user wants plan changes instead, send them back to `plan`.
@@ -36,9 +36,9 @@ If the user wants plan changes instead, send them back to `plan`.
 declares and any plan-specific rules as further numbered lines, and never drop one. Write the filled-in brief to
 `impl/brief.md` before dispatching. Building inline, follow it yourself.
 
-For a background worker, wait for its notification; never poll its output file. A `BLOCKED` line goes to the
-user with its reason first. A worker that ends without `ALL TASKS DONE` or `BLOCKED` stopped early: check the
-working tree, then relaunch with a rule saying what is already done.
+For a background worker, wait for its notification (Claude Code); never poll its output file. A `BLOCKED` line
+goes to the user with its reason first. A worker that ends without `ALL TASKS DONE` or `BLOCKED` stopped early:
+check the working tree, then relaunch with a rule saying what is already done.
 
 ## 3. Verify the implementer yourself
 

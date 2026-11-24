@@ -1,6 +1,6 @@
 # 8. Claude Code first
 
-Date: 2026-11-21. Status: accepted.
+Date: 2026-11-21. Status: accepted. Amended by [ADR 15](0015-opencode-support.md).
 
 ## Context
 

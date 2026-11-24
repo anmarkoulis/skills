@@ -1,6 +1,6 @@
 # skills
 
-Generic agent skills for Claude Code (OpenCode and Codex planned), packaged as one plugin with its own marketplace.
+Generic agent skills for Claude Code and OpenCode (Codex planned), packaged as one plugin with its own marketplace.
 
 > **Status: v0.1 done.** All v0.1 skills of the factory are written and have run real tickets.
 
@@ -78,6 +78,18 @@ To try a local checkout without installing, start Claude Code with `claude --plu
 
 Installed the earlier `factory@anmarkoulis-skills`? Uninstall it and install `anmarkoulis@anmarkoulis-skills`;
 the old id no longer receives updates.
+
+### OpenCode
+
+Clone the repo and add its `skills/` folder to `opencode.json` (global `~/.config/opencode/opencode.json`, or the
+project's):
+
+```json
+{ "skills": { "paths": ["/path/to/skills/skills"] } }
+```
+
+Check with `opencode debug skill`. Skills load by their plain name (`ship`, not `anmarkoulis:ship`); `git pull`
+updates them. What maps to what, and the limits: [docs/harnesses/opencode.md](docs/harnesses/opencode.md).
 
 ## How it is meant to be used
 
