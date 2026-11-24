@@ -1,3 +1,9 @@
+## [0.13.1](https://github.com/anmarkoulis/skills/compare/v0.13.0...v0.13.1) (2026-11-24)
+
+### Bug Fixes
+
+* sweep merged worktrees and move task folders home safely ([#75](https://github.com/anmarkoulis/skills/issues/75)) ([b0ffbf6](https://github.com/anmarkoulis/skills/commit/b0ffbf6368df6ecbf1c8dc3ee8bb5d695ca009b7))
+
 ## [0.13.0](https://github.com/anmarkoulis/skills/compare/v0.12.0...v0.13.0) (2026-11-23)
 
 ### Features
