@@ -37,7 +37,8 @@ is three directories above this skill's base directory.
    `ship done <date> status.md fallback: factory skills read from disk (plugin not loaded)`.
 
 The step writes its own files and its own `status.md` line; `ship` logs the lines for the stops and for the
-steps it owns (`simplify`).
+steps it owns (`simplify`). A step that moves the task folder (`finalize`'s cleanup) returns its new path; use
+that path from then on.
 
 ## Pipeline
 

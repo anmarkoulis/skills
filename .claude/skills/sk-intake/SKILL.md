@@ -6,6 +6,7 @@ description: Extends anmarkoulis:intake for the anmarkoulis/skills repo with its
 |---|---|
 | task folder location | default |
 | workspace command | set: `git fetch origin && git worktree add ../skills-<id> -b <branch> origin/main` (run from the main checkout) |
+| merged worktree sweep | default |
 | branch name | default |
 | prior-work sources | default |
 | observability sources | default |

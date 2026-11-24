@@ -16,7 +16,7 @@ user is intrusive.
   tracked file.
 - One script resolves the location, so no two skills can disagree about it. The location is an override point
   of `intake`.
-- If a worktree is created, the folder moves into it.
+- If a worktree is created, the folder is created in it (amended by [ADR 13](0013-task-folders-move-home.md)).
 - Progress is logged in `status.md`, one line per event:
   `<step> done|stopped|changed|loop|skipped <YYYY-MM-DD> <file> [<reason>]`.
 

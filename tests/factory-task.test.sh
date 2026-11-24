@@ -59,4 +59,34 @@ ok bash "$ft" log "$r" ship stopped status.md loop cap 1 reached
 ok bash "$ft" log "$r" ship stopped status.md repeat finding a.sh:3
 [ "$(bash "$ft" rounds "$r")" = 1 ] || fail "rounds after reset: $(bash "$ft" rounds "$r")"
 no bash "$ft" rounds "$tmp/nowhere"
+# move: the only way a task folder leaves a worktree (#67)
+a="$tmp/ma"; b="$tmp/mb"; mkdir -p "$a" "$b"; git -C "$a" init -q; git -C "$b" init -q
+m=$(bash "$ft" -C "$a" path s); mkdir "$m/raw"; echo x > "$m/raw/f"
+ok bash "$ft" log "$m" plan done plan.md
+ok bash "$ft" move s "$a" "$b"
+[ -f "$b/.factory/s/raw/f" ] || fail "move: nested file not carried"
+[ ! -e "$a/.factory/s" ] || fail "move: source left behind"
+[ "$(bash "$ft" last "$b/.factory/s")" = "plan done $(date +%F) plan.md" ] || fail "move: last line"
+[ "$(cat "$b/.factory/.gitignore")" = "*" ] || fail "move: new base not self-ignoring"
+[ ! -e "$b/.factory/status.md" ] || fail "move: flattened into the base"
+tm=$(bash "$ft" -C "$a" path t); ok bash "$ft" log "$tm" plan done plan.md
+ok bash "$ft" move t "$a/" "$b/"
+[ -f "$b/.factory/t/status.md" ] && [ ! -e "$b/.factory/status.md" ] || fail "move: trailing slash flattened"
+bash "$ft" -C "$a" path s >/dev/null
+no bash "$ft" move s "$a" "$b"
+[ -f "$a/.factory/s/status.md" ] || fail "move: source touched when target exists"
+no bash "$ft" move nope "$a" "$b"
+mkdir "$a/.factory/bare"; no bash "$ft" move bare "$a" "$b"
+[ -d "$a/.factory/bare" ] && [ ! -e "$b/.factory/bare" ] || fail "move: folder without status.md moved"
+e=$(bash "$ft" -C "$a" path empty); printf '\n \n' > "$e/status.md"; no bash "$ft" move empty "$a" "$b"
+[ -f "$a/.factory/empty/status.md" ] && [ ! -e "$b/.factory/empty" ] || fail "move: empty status.md moved"
+um=$(bash "$ft" -C "$a" path u work/tasks); ok bash "$ft" log "$um" plan done plan.md
+ok bash "$ft" move u "$a" "$b" work/tasks
+[ -f "$b/work/tasks/u/status.md" ] || fail "move: custom base"
+no bash "$ft" move "Bad" "$a" "$b"
+# x/../out resolves inside both roots, so only the '..' check refuses it.
+v=$(bash "$ft" -C "$a" path v out); ok bash "$ft" log "$v" plan done plan.md; mkdir "$a/x"
+no bash "$ft" move v "$a" "$b" x/../out
+[ -f "$a/out/v/status.md" ] && [ ! -e "$b/out" ] || fail "move: '..' base not refused"
+no bash "$ft" move s "$a" "$tmp/nowhere"
 echo "factory-task: all checks passed"
