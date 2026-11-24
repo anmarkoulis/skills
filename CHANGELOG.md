@@ -1,3 +1,9 @@
+## [0.15.0](https://github.com/anmarkoulis/skills/compare/v0.14.1...v0.15.0) (2026-11-24)
+
+### Features
+
+* support OpenCode through skills.paths ([#80](https://github.com/anmarkoulis/skills/issues/80)) ([2b46699](https://github.com/anmarkoulis/skills/commit/2b46699aa0224e7457b04ac9d4ab1afc2c3f5607)), closes [#26](https://github.com/anmarkoulis/skills/issues/26)
+
 ## [0.14.1](https://github.com/anmarkoulis/skills/compare/v0.14.0...v0.14.1) (2026-11-24)
 
 ### Bug Fixes
