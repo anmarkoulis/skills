@@ -1,3 +1,9 @@
+## [0.16.0](https://github.com/anmarkoulis/skills/compare/v0.15.0...v0.16.0) (2026-11-24)
+
+### Features
+
+* add vuln-probe agent for the security lens ([#81](https://github.com/anmarkoulis/skills/issues/81)) ([1bc3c64](https://github.com/anmarkoulis/skills/commit/1bc3c648c3a2960dff711a3b68c767be4177180a))
+
 ## [0.15.0](https://github.com/anmarkoulis/skills/compare/v0.14.1...v0.15.0) (2026-11-24)
 
 ### Features
