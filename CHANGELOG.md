@@ -1,3 +1,9 @@
+## [0.14.0](https://github.com/anmarkoulis/skills/compare/v0.13.1...v0.14.0) (2026-11-24)
+
+### Features
+
+* order user layers below the repo's, local above ([#77](https://github.com/anmarkoulis/skills/issues/77)) ([c3fb968](https://github.com/anmarkoulis/skills/commit/c3fb9684934d94c586d1e292e45fe8822c3cf4fd))
+
 ## [0.13.1](https://github.com/anmarkoulis/skills/compare/v0.13.0...v0.13.1) (2026-11-24)
 
 ### Bug Fixes
