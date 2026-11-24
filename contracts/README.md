@@ -9,6 +9,7 @@ One folder per piece of work. Only `intake` creates it, with the resolver script
 
 ```
 bash <this folder>/factory-task path <slug> [<base>]     # prints the absolute path
+bash <this folder>/factory-task move <slug> <from root> <to root> [<base>]
 ```
 
 - Default `<repo root>/.factory/<slug>/`. `<base>` is `intake`'s **task folder location** override point.
@@ -16,8 +17,12 @@ bash <this folder>/factory-task path <slug> [<base>]     # prints the absolute p
   `git status`. An existing base is left as it is.
 - `<slug>`: lowercase, `[a-z0-9._-]`, from the ticket id and title (`42-fix-login`), else from the request.
 - Every other step receives the folder's absolute path from `ship` and never computes it.
-- After a worktree is created, `intake` resolves the same slug with `-C <worktree>`, moves the contents there
-  and logs the move. From then on the worktree holds the folder.
+- With a worktree, `intake` creates the worktree first and resolves the slug with `-C <worktree>`, so the folder
+  is born there and never moves in.
+- A task folder leaves a worktree only through `factory-task move`, to the main checkout (the first
+  `git worktree list` entry), before the worktree is removed: `git worktree remove` deletes the ignored folder
+  without a warning. `move` refuses a missing source, a source without `status.md` or with an empty one, and an
+  existing target, and checks that `status.md`'s last line arrived ([ADR 13](../docs/decisions/0013-task-folders-move-home.md)).
 
 | File | Written by | Content |
 |---|---|---|

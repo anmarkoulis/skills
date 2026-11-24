@@ -25,6 +25,12 @@ Writes `ticket.md` and `raw/`.
    "no parent", related items, and a pointer to `raw/`. Security-sensitive detail stays in `raw/` and out of any
    tracker write. Only `read` of the task's own ticket writes `ticket.md`.
 
+## `title <id>`
+
+Prints the ticket's title and type and writes nothing, for a caller that needs them before the task folder
+exists (`intake` names the slug and branch from them). GitHub: `gh issue view <id> --json title,labels`, the
+type from the labels. Otherwise ask the user.
+
 ## `create <bug|feature|task|improvement> [parent <id>]`
 
 1. Ask for the title and description; for a bug also the reproduction and expected behaviour. Show the draft
@@ -32,8 +38,8 @@ Writes `ticket.md` and `raw/`.
 2. GitHub: `gh issue create`, with the matching label when the repo has one (the **type labels** override), and
    `Part of #<parent>` in the body when there is a parent. Otherwise print the draft for the user to file and
    ask for the new id.
-3. Save the new item to `raw/<id>.json` (or `.md`) and record its id and url in `decisions.md`. Never overwrite
-   `ticket.md`.
+3. Save the new item to `raw/<id>.json` (or `.md`) and record its id and url in `decisions.md`; with no task
+   folder yet (`intake`), return them and the caller saves them once it exists. Never overwrite `ticket.md`.
 
 ## `post spec <file>`
 

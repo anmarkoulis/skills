@@ -7,6 +7,8 @@ description: Use before committing, pushing or opening a PR for verified work ("
 
 Turns a verified working tree into a PR. Writes `pr-body.md` and records the PR url. Every commit, push, PR,
 ticket write and merge needs the user's yes, every time. Contracts: [../../../contracts/README.md](../../../contracts/README.md).
+`ft` means `bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's
+base directory.
 
 **Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
 
@@ -46,14 +48,17 @@ not ours needs the same evidence rule as a pre-existing test failure: the same c
 
 ## 5. Merge and cleanup
 
-The **merge policy** decides: default, a person merges, at every tier; at T2 a person always merges, whatever
-the policy says. Run the **cleanup commands** (default: none; offer to delete the merged branch and worktree)
-only after a yes.
+The **merge policy** decides: default, a person merges, at every tier; at T2 a person always merges, whatever the
+policy says. Log the Done line first, then run the **cleanup commands**, only after a yes. `ft move` prints the
+folder's new path; hand it back to `ship`, so later steps (retro) use it. Default, once the PR is merged, from a
+worktree: `ft move <slug> <worktree> <main checkout> [<location>]` (the main checkout is the first `git worktree
+list` entry), and only when it succeeds `git worktree remove <worktree>` and `git branch -D <branch>`. A failed
+move stops the cleanup; report it. A PR merged after finalize ends is caught by the next `intake`'s sweep.
 
 ## Done
 
 Log `finalize stopped <date> pr-body.md awaiting answer` when the tier has a PR stop, otherwise
-`finalize done <date> pr-body.md <PR url>`.
+`finalize done <date> pr-body.md <PR url>`. Either way, before any cleanup (section 5).
 
 ## Override points
 
@@ -62,5 +67,5 @@ Log `finalize stopped <date> pr-body.md awaiting answer` when the tier has a PR 
 | git workflow | plain git and `gh`, branch from `decisions.md` | `replace` |
 | merge policy | a person merges (T2 always) | `set` (T0 and T1 only) |
 | ticket states | none | `set` |
-| cleanup commands | none; offer branch and worktree removal | `set` |
+| cleanup commands | after the merge: `ft move` the task folder home, then remove the worktree and branch | `set` |
 | PR template | the repo's `.github/PULL_REQUEST_TEMPLATE.md`, else none (the shape above) | `set` |
