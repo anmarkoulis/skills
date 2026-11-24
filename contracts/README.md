@@ -58,7 +58,7 @@ bash <this folder>/factory-task rounds <folder>
 - `skipped` needs a reason. A loop is `<review|verify> loop <date> <file> →build <reason>`, followed by
   `build done <date> impl/status.md round <N> ← <review|verify>: <reason>`, where N is the number of earlier
   `build done` lines plus 1.
-- Facts that are not step events use step `ship`: `ship done <date> status.md layers: acme, shop (from AGENTS.md)`,
+- Facts that are not step events use step `ship`: `ship done <date> status.md layers: me (user) < acme, shop (repo) (from ~/.claude/CLAUDE.md; AGENTS.md)`,
   `ship done <date> status.md fallback: <what> → <what>`, `ship done <date> status.md loosened: <rule> because <reason>`.
 
 ### Loop cap
@@ -126,10 +126,17 @@ A repo declares its layers, lowest first, on one line in `AGENTS.md`, else `CLAU
 factory layers: acme, shop
 ```
 
-A person adds their own layer without touching the repo ([ADR 11](../docs/decisions/0011-personal-layer.md)):
-the first `factory personal layers: <prefix>` line in `CLAUDE.local.md` at the repo root, else in
-`~/.claude/CLAUDE.md`. Personal layers always come after the repo's; a prefix the repo already declares is not
-added twice.
+A person adds their own layers without touching the repo, with the same `factory personal layers: <prefix>`
+line at two levels ([ADR 11](../docs/decisions/0011-personal-layer.md),
+[ADR 14](../docs/decisions/0014-user-and-local-layers.md)):
+
+- **User**, the first such line in `~/.claude/CLAUDE.md`: your defaults for every repo. They sit below the
+  repo's layers, so a repo's answer beats them.
+- **Local**, the first such line in `CLAUDE.local.md` at the repo root: you, in this repo only. They sit above
+  the repo's layers.
+
+Both apply. Order, lowest first: core < user < repo < local. A prefix already declared at a lower level is not
+added again.
 
 The lines are read from the files, never from what the harness happened to load. No line means core only. A
 variant whose prefix is not declared is never used; a missing variant means the core default applies.
@@ -139,8 +146,9 @@ variant whose prefix is not declared is never used; a missing variant means the 
 Every skill whose **Override points** table has a point resolves its own layers before its first step, inside
 `ship`, called by another skill, or run on its own ([ADR 12](../docs/decisions/0012-layers-wherever-a-table-exists.md)):
 
-1. **The list.** Use the `layers:` line the caller handed over (a handed `layers: none` counts). None handed:
-   read the two lines above yourself. No line found: say "layers: none" in one line and skip to the skill's first
+1. **The list.** Use the `layers:` line the caller handed over as is: it is already ordered and deduped (a
+   handed `layers: none` counts). None handed:
+   read the three lines above yourself. No line found: say "layers: none" in one line and skip to the skill's first
    step. A skill this session already resolved for the same list reuses that result.
 2. **The variants.** For each prefix, lowest first, invoke `<prefix>-<skill>` if it exists, and collect its
    Overrides table and the sections its cells point to. Merge them by the rule below.
@@ -159,7 +167,8 @@ For one skill, the Overrides tables of each declared layer's `<prefix>-<skill>`,
 | `replace` | the highest layer's mechanics win |
 | `extend` | every layer's additions run, after the core's, lowest layer first |
 
-A row left at `default` is no answer: a lower layer's value stands.
+A row left at `default` is no answer: a lower layer's value stands. A higher layer may answer an `extend` point
+with `set: none`: every lower layer's additions for that point are dropped, and only higher layers' additions run.
 
 ### Variant skills
 

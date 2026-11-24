@@ -95,9 +95,10 @@ A repo declares zero or more layers, lowest first, in its `AGENTS.md`. Each laye
 [ADR 2](docs/decisions/0002-layers-and-prefixed-variants.md). `/anmarkoulis:setup` writes the line and
 scaffolds the variants. The rules are in [contracts/README.md](contracts/README.md#layers); in short:
 
-- **Personal layer.** `factory personal layers: me` in `CLAUDE.local.md` (this repo) or `~/.claude/CLAUDE.md`
-  (every repo) adds your own layer on top of the repo's, without touching it
-  ([ADR 11](docs/decisions/0011-personal-layer.md)).
+- **Personal layer.** `factory personal layers: me` adds your own layer without touching the repo: in
+  `~/.claude/CLAUDE.md` as defaults for every repo, below the repo's layers; in `CLAUDE.local.md` for this repo
+  only, above them. Order: core < user < repo < local
+  ([ADR 14](docs/decisions/0014-user-and-local-layers.md)).
 - **Where variants live.** Any skill folder the session loads: the repo's `.claude/skills/`, your
   `~/.claude/skills/`, or a plugin. A company layer can live once at user level.
 - **What a variant holds.** An Overrides table answering the core step's Override points, and sections below it
