@@ -35,7 +35,7 @@ Nothing extra. OpenCode also reads `.claude/skills/` in the project and `~/.clau
 | invoke `anmarkoulis:<skill>` with the Skill tool | the `skill` tool with `<skill>` (no `anmarkoulis:` prefix) |
 | structured question (AskUserQuestion) | the `question` tool |
 | dispatch a subagent (the Agent tool) | the `task` tool with a generic agent (`general`) |
-| the plugin agents in `agents/` (`task-reviewer`, `bug-diagnoser`, `qa-runner`, `manual-tester`) | not loaded; `delegate` falls back to a generic worker or inline, as it does without them in Claude Code |
+| the plugin agents in `agents/` (`task-reviewer`, `bug-diagnoser`, `qa-runner`, `manual-tester`, `vuln-probe`) | not loaded; `delegate` falls back to a generic worker or inline, as it does without them in Claude Code |
 | one background agent, wait for its notification | none; run the same brief as one `task` worker in the foreground, or inline |
 | plugin root: three directories above the skill's base directory | the same: OpenCode's `skill` tool prints `Base directory for this skill: <dir>` |
 | a settings hook in `.claude/settings.json` (`retro`) | a pre-commit hook or a CI job, `retro`'s own fallback |

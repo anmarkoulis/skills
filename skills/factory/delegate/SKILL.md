@@ -1,6 +1,6 @@
 ---
 name: delegate
-description: Use when a factory step hands work to a worker (build's implementers and reviewers, review's reviewer, debugging's diagnosers, verify's QA and manual runs) to pick who runs it (specialist agent, generic worker or inline), give it the same brief and result-file contract at every level, and log every fallback. Use as the worker picker of anmarkoulis:ship's steps.
+description: Use when a factory step hands work to a worker (build's implementers and reviewers, review's reviewer, debugging's diagnosers, verify's QA and manual runs, deep-review's security probes) to pick who runs it (specialist agent, generic worker or inline), give it the same brief and result-file contract at every level, and log every fallback. Use as the worker picker of anmarkoulis:ship's steps.
 ---
 
 # delegate
@@ -12,8 +12,8 @@ base directory. Decision: [ADR 5](../../../docs/decisions/0005-agents-and-worker
 
 **Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
 
-**Inputs from the caller:** the role (`implementer`, `reviewer`, `diagnoser`, `qa-runner`, `manual-tester`),
-the brief, the result file path inside the caller's task folder, and the plan task's agent if it names one.
+**Inputs from the caller:** the role (one from the routing table below), the brief, the result file path inside
+the caller's task folder, and the plan task's agent if it names one.
 
 ## 1. Pick the level
 
@@ -39,6 +39,7 @@ Default routing, from this plugin's `agents/` (level 1 when they resolve):
 | diagnoser | `anmarkoulis:bug-diagnoser` |
 | qa-runner | `anmarkoulis:qa-runner` |
 | manual-tester | `anmarkoulis:manual-tester` |
+| security-prober | `anmarkoulis:vuln-probe` |
 
 A specialist is an accelerator, never a requirement. Drop to the next level when either happens:
 
@@ -94,5 +95,5 @@ list of ids, an item known to be there. Well-formed is not verified.
 
 | Point | Default | Allowed |
 |---|---|---|
-| agent routing | the default routing above | `set` (role or path → agent; roles: implementer, reviewer, diagnoser, qa-runner, manual-tester) |
+| agent routing | the default routing above | `set` (role or path → agent; roles from the table above) |
 | model per role | the agent's own model; a generic worker inherits the session's | `set` (role → model) |

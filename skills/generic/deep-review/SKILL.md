@@ -81,7 +81,7 @@ only for a lens that is not listed, and say so. Lenses run in their own fresh co
 | Bugs | Claude Code's built-in `code-review` on the target, with **no** `--comment`, `--fix` or `--post`. Never the `code-review:code-review` plugin command: it can post. | an agent (or inline pass) on changed lines only: inverted conditions, null errors, broken guards, regressions, wrong-field writes; no style, nothing pre-existing |
 | Standards and spec | `mattpocock-skills:code-review` | inline check of added lines against the step 3 rules and the ticket's acceptance criteria, plus `git log -S` / `git blame` on modified guards |
 | Every line needed | `ponytail:ponytail-review` | skipped, and said so |
-| Security, on request or at tier T2 | the `vuln-probe` agent when it exists, else built-in `security-review` | inline lens: trust boundaries, auth, injection, secrets and personal data in logs |
+| Security, on request or at tier T2 | built-in `security-review`, then each finding in a class `anmarkoulis:vuln-probe` covers handed to it through `anmarkoulis:delegate`, role `security-prober`, all in parallel; its `result.md` verdict is that finding's evidence | inline lens: trust boundaries, auth, injection, secrets and personal data in logs |
 | Extra | the **extra lenses** point | — |
 
 Record which lenses ran and which fell back, at the top of `review.md`.
