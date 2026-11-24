@@ -45,8 +45,11 @@ scope ends.
    - A gate made of chained `and`s, or evaluated inside a filter, is one diamond per input that can refuse, all
      joining the single outcome node the caller tests (`no recipients → return`).
    - Work handed to another process (a queue task, a webhook, an outbox) joins with a dotted edge: `-.->`.
-   - With a `diff` that ends at `ref`, mark the touched nodes: `classDef changed stroke-width:3px,stroke-dasharray:4` and
-     `class <ids> changed`.
+   - With a `diff` that ends at `ref` (After), the nodes whose code it adds or edits get
+     `classDef changed fill:#f9a825,color:#000,stroke-width:3px,stroke-dasharray:4` and `class <ids> changed`.
+     With a `diff` that starts at `ref` (Before), the nodes whose code it deletes or edits get
+     `classDef removed fill:#ef9a9a,color:#000,stroke-width:3px,stroke-dasharray:4` and `class <ids> removed`.
+     Otherwise no colors.
    - More than 15 nodes: first merge the refusing diamonds into one, labelled with their conditions; then
      collapse one layer into a single node, and say which under the chart.
 3. **`## Schematic`:** pseudo-code in the repo's language. The caller first, then one block per layer in call
@@ -79,7 +82,7 @@ under the chart instead.
 When the `diff` changes 20 lines or fewer and adds or removes no function on the path, the output contract still
 applies, reduced:
 
-- **Pass the `diff` to both calls.** The Before file uses it only to decide what to fold.
+- **Pass the `diff` to both calls.** The Before file uses it to decide what to fold and which nodes to color (section 3).
 - **Schematic:** a layer the diff does not touch keeps its banner and its signature line, then
   `...  # unchanged` (a whole layer needs no range). Write out the changed layers, and the caller folded the
   same way.
@@ -107,7 +110,7 @@ flowchart TD
   cap -- no --> charge["charge<br/>payments/charge.py:5"]
   zero --> charge
   charge -.-> rcpt["send_receipt (async)<br/>mail/tasks.py:8"]
-  classDef changed stroke-width:3px,stroke-dasharray:4
+  classDef changed fill:#f9a825,color:#000,stroke-width:3px,stroke-dasharray:4
   class cap changed
 ```
 
