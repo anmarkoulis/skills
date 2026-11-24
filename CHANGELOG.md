@@ -1,3 +1,9 @@
+## [0.14.1](https://github.com/anmarkoulis/skills/compare/v0.14.0...v0.14.1) (2026-11-24)
+
+### Bug Fixes
+
+* color changed nodes in code-schematic charts ([#79](https://github.com/anmarkoulis/skills/issues/79)) ([2c80a28](https://github.com/anmarkoulis/skills/commit/2c80a2854ca001f5e2f0ef571ccd53f8489e4b94))
+
 ## [0.14.0](https://github.com/anmarkoulis/skills/compare/v0.13.1...v0.14.0) (2026-11-24)
 
 ### Features
