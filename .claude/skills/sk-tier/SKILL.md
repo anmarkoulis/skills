@@ -5,5 +5,5 @@ description: Extends anmarkoulis:tier for the anmarkoulis/skills repo with minim
 | Point | This layer |
 |---|---|
 | confirmation | default |
-| sensitive areas | extend: `.github/workflows/release.yml`, `.releaserc.json` (release App credential and version bumps, #18) |
+| sensitive areas | extend: `.github/workflows/release.yml`, `.releaserc.json` (release App credential and version bumps, #18), `package.json`, `package-lock.json` (the code the release runs with that credential, #83) |
 | minimum tier per path or change type | extend: T1 for `contracts/**` (every step relies on it), `.claude-plugin/**` (install id and skills list), `.github/workflows/**` |
