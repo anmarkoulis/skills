@@ -1,3 +1,9 @@
+## [0.16.1](https://github.com/anmarkoulis/skills/compare/v0.16.0...v0.16.1) (2026-11-26)
+
+### Bug Fixes
+
+* make finalize ask before its first commit ([#88](https://github.com/anmarkoulis/skills/issues/88)) ([8b02372](https://github.com/anmarkoulis/skills/commit/8b023725f64d3973d62d535d8b4176ca9727f8d2)), closes [#87](https://github.com/anmarkoulis/skills/issues/87)
+
 ## [0.16.0](https://github.com/anmarkoulis/skills/compare/v0.15.0...v0.16.0) (2026-11-24)
 
 ### Features
