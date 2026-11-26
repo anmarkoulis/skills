@@ -6,9 +6,9 @@ description: Use before committing, pushing or opening a PR for verified work ("
 # finalize
 
 Turns a verified working tree into a PR. Writes `pr-body.md` and records the PR url. Every commit, push, PR,
-ticket write and merge needs the user's yes, every time. Contracts: [../../../contracts/README.md](../../../contracts/README.md).
-`ft` means `bash <plugin root>/contracts/factory-task`; the plugin root is three directories above this skill's
-base directory.
+ticket write and merge needs the user's yes, every time. A request to finalize is not that yes. Contracts:
+[../../../contracts/README.md](../../../contracts/README.md). `ft` means `bash <plugin root>/contracts/factory-task`;
+the plugin root is three directories above this skill's base directory.
 
 **Layers:** resolve them first ([resolving layers](../../../contracts/README.md#resolving-layers)).
 
@@ -19,7 +19,9 @@ base directory.
 
 ## 2. Commit and push
 
-Ask first. Then, with the **git workflow** (default: plain git and `gh`):
+Stop before the first git write: show the branch, the files to stage and the commit message, and end your
+turn with the question. The request that started finalize is not the yes. Then, with the **git workflow**
+(default: plain git and `gh`):
 
 - Stage the changed files by name, never `git add -A`. Follow the repo's commit conventions
   (`CONTRIBUTING.md`, `AGENTS.md`, recent history); the user's own instructions win.
