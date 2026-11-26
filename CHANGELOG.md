@@ -1,3 +1,9 @@
+## [0.16.2](https://github.com/anmarkoulis/skills/compare/v0.16.1...v0.16.2) (2026-11-26)
+
+### Bug Fixes
+
+* keep committed work and T0 off simplify on resume ([#89](https://github.com/anmarkoulis/skills/issues/89)) ([405092b](https://github.com/anmarkoulis/skills/commit/405092b7f79683869ec2021627396752a063baf0))
+
 ## [0.16.1](https://github.com/anmarkoulis/skills/compare/v0.16.0...v0.16.1) (2026-11-26)
 
 ### Bug Fixes
