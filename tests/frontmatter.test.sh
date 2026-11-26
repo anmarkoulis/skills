@@ -36,4 +36,19 @@ files=$(git ls-files -- '*SKILL.md' 'agents/*.md')
 bad=$(scan $files)
 [ -z "$bad" ] || fail "unquoted frontmatter value contains ' #' (quote it):
 $bad"
+
+# A skill folder missing from plugin.json never loads (#84).
+diff <(jq -r '.skills[]' .claude-plugin/plugin.json | sed 's#^\./##' | sort) <(printf '%s\n' skills/*/* | sort) \
+  || fail "plugin.json skills list (<) and skills/*/* folders (>) differ"
+
+# A name: that differs from its folder (SKILL.md) or file (agents/*.md) loads under the wrong name (#84).
+bad=""
+for f in $files; do
+  case "$f" in */SKILL.md) want=$(basename "$(dirname "$f")") ;; *) want=$(basename "$f" .md) ;; esac
+  got=$(awk 'NR == 1 && $0 != "---" { exit } NR > 1 && $0 == "---" { exit } NR > 1 && sub(/^name:[ \t]*/, "") { print; exit }' "$f")
+  [ "$got" = "$want" ] || bad="$bad$f: name '$got', expected '$want'
+"
+done
+[ -z "$bad" ] || fail "frontmatter name does not match its folder or file:
+$bad"
 echo "frontmatter: ok"
