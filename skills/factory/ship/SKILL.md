@@ -98,9 +98,10 @@ resumed from. If the file the line names is missing, re-run that step instead of
 | `<step> stopped` with any other reason | show the reason, ask, then re-run that step |
 | `<step> changed` | re-run that step, then its stop |
 | `<review\|verify\|finalize> loop` | the loop cap check, then build, round N+1 |
-| `build done` | simplify (first round) or review (later rounds) |
+| `build done` | simplify (first round, from T1) or review (T0, or later rounds) |
+| `build skipped` with a commit sha | review |
 | `retro done` | finished; nothing to resume |
-| `<step> done` or `<step> skipped` | the next step in the pipeline |
+| `<step> done` or `<step> skipped` | the next step in the pipeline that runs at this tier |
 
 Work already committed before intake: after intake, log understand, plan and build as `skipped` with the
 commit sha as the reason, then continue at review.
